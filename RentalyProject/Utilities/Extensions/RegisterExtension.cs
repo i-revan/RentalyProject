@@ -18,14 +18,23 @@ namespace RentalyProject.Utilities.Extensions
             }
             return false;
         }
-        public static bool HasDigit(this string identity)
+        public static bool CheckIdentity(this string identity)
         {
             foreach (var letter in identity)
             {
-                if (Char.IsDigit(letter))
+                if (!Char.IsLetter(letter))
                 {
-                    return true;
+                    return false;
                 }
+            }
+            return true;
+        }
+        public static bool CheckPhoneNumber(this string number)
+        {
+            Regex regex = new Regex(@"^(\+994|0)(50|51|55|70|77)(\d{7})$");
+            if (regex.IsMatch(number))
+            {
+                return true;
             }
             return false;
         }

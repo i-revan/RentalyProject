@@ -2,9 +2,10 @@
 
 namespace RentalyProject.Models
 {
-    public class Car:BaseHasName
+    public class Car:BaseEntity
     {
         public string Description { get; set; }
+        public int Like { get; set; }
         public int Seats { get; set; }
         public int Doors { get; set; }
         public string Luggage { get; set; }

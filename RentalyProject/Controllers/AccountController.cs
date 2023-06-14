@@ -31,21 +31,6 @@ namespace RentalyProject.Controllers
         public async Task<IActionResult> Register(RegisterVM newUser, string? returnUrl)
         {
             if (!ModelState.IsValid) return View();
-            if (newUser.Name.HasDigit())
-            {
-                ModelState.AddModelError("Name", "Please enter your name correctly!");
-                return View();
-            }
-            if (newUser.Surname.HasDigit())
-            {
-                ModelState.AddModelError("Surname", "Please enter your surname correctly!");
-                return View();
-            }
-            if (!newUser.Email.CheckMail())
-            {
-                ModelState.AddModelError("Email", "Please enter your email correctly!");
-                return View();
-            }
             newUser.Name = newUser.Name.Capitalize();
             newUser.Surname = newUser.Surname.Capitalize();
             AppUser user = _mapper.Map<AppUser>(newUser);
