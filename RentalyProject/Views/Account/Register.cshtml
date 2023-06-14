@@ -1,0 +1,108 @@
+﻿@using RentalyProject.ViewModels.Account;
+@model RegisterVM
+<!-- section begin -->
+<section id="subheader" class="jarallax text-light">
+    <img src="~/assets/images/background/subheader.jpg" class="jarallax-img" alt="">
+    <div class="center-y relative text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1>Register</h1>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section close -->
+<section aria-label="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h3>Don't have an account? Register now.</h3>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+
+                <div class="spacer-10"></div>
+
+                <form name="contactForm" id='contact_form' class="form-border" method="post">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="field-set">
+                                <label asp-for="Name">Name:</label>
+                                <input asp-for="Name" class="form-control">
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field-set">
+                                <label asp-for="Surname">Surname:</label>
+                                <input asp-for="Surname" class="form-control">
+                                <span class="text-danger" asp-validation-for="Surname"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-set">
+                                <label asp-for="Email">Email Address:</label>
+                                <input asp-for="Email" name="email" id="email" class="form-control">
+                                <span class="text-danger" asp-validation-for="Email"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-set">
+                                <label asp-for="Username">Choose a Username:</label>
+                                <input asp-for="Username" class="form-control">
+                                <span class="text-danger" asp-validation-for="Username"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-set">
+                                <label asp-for="PhoneNumber">Phone:</label>
+                                <input asp-for="PhoneNumber" class="form-control">
+                                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-set">
+                                <label asp-for="Password">Password:</label>
+                                <input asp-for="Password" class="form-control">
+                                <span class="text-danger" asp-validation-for="Password"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-set">
+                                <label asp-for="ConfirmPassword">Re-enter Password:</label>
+                                <input asp-for="ConfirmPassword" class="form-control">
+                                <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="col-md-12">
+
+                            <div id='submit' class="pull-left">
+                                <button type='submit' id='send_message' class="btn-main color-2">Register Now</button>
+                            </div>
+
+                            <div id='mail_success' class='success'>Your message has been sent successfully.</div>
+                            <div id='mail_fail' class='error'>Sorry, error occured this time sending your message.</div>
+                            <div class="clearfix"></div>
+                            <div>Already have account? <a asp-controller="account" asp-action="login">Login</a></div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>

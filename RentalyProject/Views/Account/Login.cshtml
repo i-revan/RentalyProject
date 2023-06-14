@@ -1,0 +1,46 @@
+﻿@using RentalyProject.ViewModels.Account;
+@model LoginVM
+<!-- content begin -->
+<div class="no-bottom no-top" id="content">
+    <div id="top"></div>
+    <section id="section-hero" aria-label="section" class="jarallax">
+        <img src="~/assets/images/background/2.jpg" class="jarallax-img" alt="">
+        <div class="v-center">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 offset-lg-4">
+                        <div class="padding40 rounded-3 shadow-soft" data-bgcolor="#ffffff">
+                            <h4>Login</h4>
+                            <div class="spacer-10"></div>
+                            <form id="form_register" class="form-border" method="post">
+                                <div class="field-set">
+                                    <input style="width:325px;" asp-for="UsernameOrEmail" placeholder="Username or Email" />
+                                    <span class="text-danger" asp-validation-for="UsernameOrEmail"></span>
+                                </div>
+                                <div class="field-set">
+                                    <input asp-for="Password" class="form-control" placeholder="Password" />
+                                    <span class="text-danger" asp-validation-for="Password"></span>
+                                </div>
+                                <div class="text-danger" asp-validation-summary="ModelOnly" ></div>
+                                <div id="submit">
+                                    <button type="submit" class="btn-main btn-fullwidth rounded-3">Login</button>
+                                </div>
+                            </form>
+                            <div>Don't have account? <a asp-controller="account" asp-action="register">Register</a></div>
+                            <div class="title-line">Or&nbsp;sign&nbsp;up&nbsp;with</div>
+                            <div class="row g-2">
+                                <div class="col-lg-6">
+                                    <a class="btn-sc btn-fullwidth mb10" href="#"><img src="~/assets/images/svg/google_icon.svg" alt="">Google</a>
+                                </div>
+                                <div class="col-lg-6">
+                                    <a class="btn-sc btn-fullwidth mb10" href="#"><img src="~/assets/images/svg/facebook_icon.svg" alt="">Facebook</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- content close -->
