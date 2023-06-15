@@ -38,6 +38,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (key == null) return BadRequest();
             var setting = await _context.Settings.FirstOrDefaultAsync(s => s.Key == key);
             setting.Value = settingVM.Value;
+            setting.UpdatedAt = DateTime.Now;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
