@@ -4,6 +4,7 @@ namespace RentalyProject.Models
 {
     public class Category:BaseHasName
     {
-        public ICollection<Car> Cars { get; set; }
+        public string ImageUrl { get; set; }
+        public List<BodyTypeCategory> BodyTypeCategories { get; set; }
     }
 }

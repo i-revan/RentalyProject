@@ -11,6 +11,7 @@ namespace RentalyProject.Utilities.Extensions
         }
         public static bool CheckMail(this string email)
         {
+            if(email is  null) return false;
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             if (regex.IsMatch(email))
             {
@@ -20,6 +21,7 @@ namespace RentalyProject.Utilities.Extensions
         }
         public static bool CheckIdentity(this string identity)
         {
+            if(identity is null) return false;
             foreach (var letter in identity)
             {
                 if (!Char.IsLetter(letter))
@@ -31,6 +33,7 @@ namespace RentalyProject.Utilities.Extensions
         }
         public static bool CheckPhoneNumber(this string number)
         {
+            if (number is null) return false;
             Regex regex = new Regex(@"^(\+994|0)(50|51|55|70|77)(\d{7})$");
             if (regex.IsMatch(number))
             {

@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
+using RentalyProject.Middlewares;
 using RentalyProject.Models;
 using RentalyProject.Services;
 using RentalyProject.Validators;
@@ -37,6 +38,7 @@ namespace RentalyProject
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseStaticFiles();
+            //app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{area:exists}/{controller=home}/{action=index}/{id?}"
