@@ -6,8 +6,8 @@ using RentalyProject.DAL;
 using RentalyProject.Models;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
-using RentalyProject.ViewModels.Marka;
-using RentalyProject.ViewModels.Model;
+using RentalyProject.ViewModels.Markas;
+using RentalyProject.ViewModels.Models;
 using System.Data;
 
 namespace RentalyProject.Areas.RentalyAdmin.Controllers

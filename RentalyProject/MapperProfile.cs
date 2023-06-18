@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using RentalyProject.Models;
 using RentalyProject.ViewModels.Account;
-using RentalyProject.ViewModels.Category;
-using RentalyProject.ViewModels.Model;
+using RentalyProject.ViewModels.Categories;
+using RentalyProject.ViewModels.Models;
 
 namespace RentalyProject
 {

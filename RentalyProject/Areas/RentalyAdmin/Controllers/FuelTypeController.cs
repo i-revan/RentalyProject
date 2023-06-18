@@ -5,7 +5,7 @@ using RentalyProject.DAL;
 using RentalyProject.Models;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
-using RentalyProject.ViewModels.FuelType;
+using RentalyProject.ViewModels.FuelTypes;
 using System.Data;
 
 namespace RentalyProject.Areas.RentalyAdmin.Controllers
@@ -67,7 +67,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (id == null || id < 1) throw new BadRequestException("Id is not found");
             FuelType fuel = await _context.FuelTypes.FirstOrDefaultAsync(f => f.Id == id);
             if (fuel == null) throw new NotFoundException("There is no fuel type has this id or it was deleted");
-            bool result = await _context.FuelTypes.AnyAsync(f => f.Name.Trim().ToLower() == fueltypeVM.Name.ToLower());
+            bool result = await _context.FuelTypes.AnyAsync(f => f.Name.Trim().ToLower() == fueltypeVM.Name.ToLower() && f.Id!=fuel.Id);
             if (result)
             {
                 ModelState.AddModelError("Name", "There already exists a fuel type has this name");

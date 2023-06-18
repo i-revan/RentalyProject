@@ -5,7 +5,7 @@ using RentalyProject.DAL;
 using RentalyProject.Models;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
-using RentalyProject.ViewModels.Marka;
+using RentalyProject.ViewModels.Markas;
 using System.Data;
 
 namespace RentalyProject.Areas.RentalyAdmin.Controllers
@@ -66,7 +66,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Marka marka = await _context.Markas.FirstOrDefaultAsync(m => m.Id == id);
             if (marka is null) throw new NotFoundException("Marka is not found");
-            if (await _context.Markas.AnyAsync(m => m.Name.Trim().ToLower() == markaVM.Name.Trim().ToLower()))
+            if (await _context.Markas.AnyAsync(m => m.Name.Trim().ToLower() == markaVM.Name.Trim().ToLower() && m.Id!=marka.Id))
             {
                 ModelState.AddModelError("Name", "There already exists marka has this name");
                 return View(markaVM);

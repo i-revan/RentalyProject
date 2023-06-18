@@ -38,7 +38,7 @@ namespace RentalyProject
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseStaticFiles();
-            //app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{area:exists}/{controller=home}/{action=index}/{id?}"

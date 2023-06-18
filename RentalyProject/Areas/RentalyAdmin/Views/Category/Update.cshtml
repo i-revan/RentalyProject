@@ -1,4 +1,4 @@
-﻿@using RentalyProject.ViewModels.Category;
+﻿@using RentalyProject.ViewModels.Categories;
 @model UpdateCategoryVM
 <div class="container-fluid page-body-wrapper">
 
@@ -24,7 +24,7 @@
                                 </div>
                                 <div>
                                     <img style="background-color: black;" src="~/assets/images/select-form/@Model.ImageUrl"/>
-                                    <input style="display:none" asp-for="ImageUrl"/>
+                                    <input asp-for="ImageUrl" value="@Model.ImageUrl" class="d-none" />
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Photo">Photo</label>

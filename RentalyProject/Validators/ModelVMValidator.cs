@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using RentalyProject.ViewModels.Model;
+using RentalyProject.ViewModels.Models;
 
 namespace RentalyProject.Validators
 {

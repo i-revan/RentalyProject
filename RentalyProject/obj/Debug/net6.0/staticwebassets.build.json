@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JPySM6tszO7+t5AUD5asqTpNHPvm9MoAiYMQUqoN2t0=",
+  "Hash": "njnx+6dIq/ro4JByuJoBcl1eUmfGBqAT+AZxSbUUuWg=",
   "Source": "RentalyProject",
   "BasePath": "_content/RentalyProject",
   "Mode": "Default",
@@ -17221,6 +17221,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\select-form\\1d3167f3-3eb2-435f-ada4-d8798c540682sportscar.png"
     },
     {
+      "Identity": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\select-form\\a5af9417-0017-4d3a-b06c-b2203a22912fcar.png",
+      "SourceId": "RentalyProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\",
+      "BasePath": "_content/RentalyProject",
+      "RelativePath": "assets/images/select-form/a5af9417-0017-4d3a-b06c-b2203a22912fcar.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\select-form\\a5af9417-0017-4d3a-b06c-b2203a22912fcar.png"
+    },
+    {
       "Identity": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\select-form\\a75c45df-fad6-44a1-9aa9-a054b415f011minibus.png",
       "SourceId": "RentalyProject",
       "SourceType": "Discovered",
@@ -17236,23 +17253,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\select-form\\a75c45df-fad6-44a1-9aa9-a054b415f011minibus.png"
-    },
-    {
-      "Identity": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\select-form\\b4a7949c-3475-42e4-9e6b-feffa855a277car.png",
-      "SourceId": "RentalyProject",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\",
-      "BasePath": "_content/RentalyProject",
-      "RelativePath": "assets/images/select-form/b4a7949c-3475-42e4-9e6b-feffa855a277car.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\select-form\\b4a7949c-3475-42e4-9e6b-feffa855a277car.png"
     },
     {
       "Identity": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\select-form\\bac2ef61-eef0-4596-aa8a-5fdb5d6863b7van.png",

@@ -48,6 +48,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXENhdGVnb3J5XFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Feature/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZlYXR1cmVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Feature/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZlYXR1cmVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Feature/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZlYXR1cmVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Feature/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZlYXR1cmVcVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/FuelType/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZ1ZWxUeXBlXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -130,6 +146,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/Error/ErrorPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3JQYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/Home/Favorite.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGYXZvcml0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/Home/Index.cshtml]
