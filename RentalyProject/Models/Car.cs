@@ -5,10 +5,10 @@ namespace RentalyProject.Models
     public class Car:BaseEntity
     {
         public string Description { get; set; }
-        public int Like { get; set; } = 0;
+        public int Like { get; set; }
         public int Seats { get; set; }
         public int Doors { get; set; }
-        public string Luggage { get; set; }
+        public int Luggage { get; set; }
         public int EngineCapacity { get; set; }
         public int Year { get; set; }
         public int Milleage { get; set; }

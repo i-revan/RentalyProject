@@ -1,0 +1,128 @@
+﻿@model Car
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Cars</h4>
+            <a asp-controller="car" asp-action="create" class="btn btn-success">Create Car</a>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Car
+                            </th>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Marka
+                            </th>
+                            <th>
+                                Seat number
+                            </th>
+                            <th>
+                                Doors
+                            </th>
+                            <th>
+                                Luggage
+                            </th>
+                            <th>
+                                Engine Capacity
+                            </th>
+                            <th>
+                                Year
+                            <th>
+                                Milleage
+                            <th>
+                                Transmission
+                            <th>
+                                Fuel Economy
+                            <th>
+                                Rent Price
+                            </th>
+                            <th>
+                                Fuel Type
+                            </th>
+                            <th>
+                                Body Type
+                            </th>
+                            <th>
+                                Interior Color
+                            </th>
+                            <th>
+                                Exterior Color
+                            </th>
+                            <th>
+                                Create Time
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <img src="~/assets/images/cars/@Model.CarImages.FirstOrDefault(ci=>ci.IsMain==true).ImageUrl" />
+                            </td>
+                            <td>
+                                @Model.Id
+                            </td>
+                            <td>
+                                @Model.Marka.Name
+                            </td>
+                            <td>
+                                @Model.Seats
+                            </td>
+                            <td>
+                                @Model.Doors
+                            </td>
+                            <td>
+                                @Model.Luggage
+                            </td>
+                            <td>
+                                @Model.EngineCapacity
+                            </td>
+                            <td>
+                                @Model.Year
+                            </td>
+                            <td>
+                                @Model.Milleage
+                            </td>
+                            <td>
+                                @Model.Transmission
+                            </td>
+                            <td>
+                                @Model.FuelEconomy
+                            </td>
+                            <td>
+                                @String.Format("{0:#,##0}", Model.RentPrice)$
+                            </td>
+                            <td>
+                                @Model.FuelType.Name
+                            </td>
+                            <td>
+                                @Model.BodyType.Name
+                            </td>
+                            <td>
+                                @Model.CarColors.FirstOrDefault(cc=>cc.IsInterior==true).Color.Name
+                            </td>
+                            <td>
+                                @Model.CarColors.FirstOrDefault(cc=>cc.IsInterior==false).Color.Name
+                            </td>
+                            <td>
+                                @Model.CreatedAt.ToString("dd MMMM yyyy hh:mm tt")
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

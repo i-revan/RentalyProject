@@ -236,9 +236,6 @@ namespace RentalyProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -250,8 +247,6 @@ namespace RentalyProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("BodyTypes");
                 });
@@ -321,9 +316,8 @@ namespace RentalyProject.Migrations
                     b.Property<int>("Like")
                         .HasColumnType("int");
 
-                    b.Property<string>("Luggage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Luggage")
+                        .HasColumnType("int");
 
                     b.Property<int>("MarkaId")
                         .HasColumnType("int");
@@ -405,9 +399,6 @@ namespace RentalyProject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("FeatureId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FeautureId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -678,13 +669,6 @@ namespace RentalyProject.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RentalyProject.Models.BodyType", b =>
-                {
-                    b.HasOne("RentalyProject.Models.Category", null)
-                        .WithMany("BodyTypes")
-                        .HasForeignKey("CategoryId");
-                });
-
             modelBuilder.Entity("RentalyProject.Models.BodyTypeCategory", b =>
                 {
                     b.HasOne("RentalyProject.Models.BodyType", "BodyType")
@@ -694,7 +678,7 @@ namespace RentalyProject.Migrations
                         .IsRequired();
 
                     b.HasOne("RentalyProject.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("BodyTypeCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -809,7 +793,7 @@ namespace RentalyProject.Migrations
 
             modelBuilder.Entity("RentalyProject.Models.Category", b =>
                 {
-                    b.Navigation("BodyTypes");
+                    b.Navigation("BodyTypeCategories");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.Color", b =>
