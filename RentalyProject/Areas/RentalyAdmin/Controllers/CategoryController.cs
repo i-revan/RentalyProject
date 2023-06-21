@@ -52,21 +52,25 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 Name = categoryVM.Name.Capitalize(),
                 BodyTypeCategories = new List<BodyTypeCategory>()
             };
-            foreach (int bodyTypeId in categoryVM.BodyTypeIds)
+            if (!(categoryVM.BodyTypeIds is null))
             {
-                if (!(await _context.BodyTypes.AnyAsync(b => b.Id == bodyTypeId)))
+                foreach (int bodyTypeId in categoryVM.BodyTypeIds)
                 {
-                    ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
-                    ModelState.AddModelError("BodyTypeIds", $"There is no body type that has {bodyTypeId} id");
-                    return View();
+                    if (!(await _context.BodyTypes.AnyAsync(b => b.Id == bodyTypeId)))
+                    {
+                        ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                        ModelState.AddModelError("BodyTypeIds", $"There is no body type that has {bodyTypeId} id");
+                        return View();
+                    }
+                    BodyTypeCategory bodyTypeCategory = new BodyTypeCategory()
+                    {
+                        BodyTypeId = bodyTypeId,
+                        Category = category
+                    };
+                    category.BodyTypeCategories.Add(bodyTypeCategory);
                 }
-                BodyTypeCategory bodyTypeCategory = new BodyTypeCategory()
-                {
-                    BodyTypeId = bodyTypeId,
-                    Category = category
-                };
-                category.BodyTypeCategories.Add(bodyTypeCategory);
             }
+            
 
             if (!categoryVM.Photo.CheckFileType("image/"))
             {

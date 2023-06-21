@@ -37,6 +37,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             ViewBag.Features = _context.Features.AsEnumerable();
             ViewBag.Colors = _context.Colors.AsEnumerable();
             ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+            ViewBag.Categories = _context.Categories.AsEnumerable();
             return View();
         }
         [HttpPost]
@@ -66,6 +67,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 FuelTypeId = carVM.FuelTypeId,
                 MarkaId = carVM.MarkaId,
                 BodyTypeId = carVM.BodyTypeId,
+                CategoryId = carVM.CategoryId,
                 IsAvailable = false,
                 Like = 0,
                 CreatedAt = DateTime.Now,
@@ -140,14 +142,14 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                     ModelState.AddModelError("MainPhoto", "File format is not correct!");
                     return View();
                 }
-                if (!carVM.MainPhoto.CheckFileSize(400))
+                if (!carVM.MainPhoto.CheckFileSize(500))
                 {
                     ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
                     ViewBag.Markas = _context.Markas.AsEnumerable();
                     ViewBag.Features = _context.Features.AsEnumerable();
                     ViewBag.Colors = _context.Colors.AsEnumerable();
                     ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
-                    ModelState.AddModelError("MainPhoto", "File size must be 400 kb or less!");
+                    ModelState.AddModelError("MainPhoto", "File size must be 500 kb or less!");
                     return View();
                 }
                 CarImages carImage = new CarImages()
@@ -170,6 +172,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 .Include(c=>c.Marka)
                 .Include(c=>c.BodyType)
                 .Include(c=>c.FuelType)
+                .Include(c=>c.Category)
                 .Include(c=>c.CarColors).ThenInclude(cc=>cc.Color)
                 .Include(c=>c.CarFeatures).ThenInclude(cf=>cf.Feature)
                 .Include(c=>c.CarImages)

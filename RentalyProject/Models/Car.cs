@@ -25,6 +25,8 @@ namespace RentalyProject.Models
         public ICollection<CarColor> CarColors { get; set; }
         public int MarkaId { get; set; }
         public Marka Marka { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
     }
 }

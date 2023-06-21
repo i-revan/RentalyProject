@@ -291,6 +291,9 @@ namespace RentalyProject.Migrations
                     b.Property<int>("BodyTypeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -344,6 +347,8 @@ namespace RentalyProject.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BodyTypeId");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("FuelTypeId");
 
@@ -696,6 +701,12 @@ namespace RentalyProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RentalyProject.Models.Category", "Category")
+                        .WithMany("Cars")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RentalyProject.Models.FuelType", "FuelType")
                         .WithMany("Cars")
                         .HasForeignKey("FuelTypeId")
@@ -709,6 +720,8 @@ namespace RentalyProject.Migrations
                         .IsRequired();
 
                     b.Navigation("BodyType");
+
+                    b.Navigation("Category");
 
                     b.Navigation("FuelType");
 
@@ -794,6 +807,8 @@ namespace RentalyProject.Migrations
             modelBuilder.Entity("RentalyProject.Models.Category", b =>
                 {
                     b.Navigation("BodyTypeCategories");
+
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.Color", b =>

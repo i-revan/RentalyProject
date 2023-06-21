@@ -18,6 +18,7 @@ namespace RentalyProject.ViewModels.Cars
         public int BodyTypeId { get; set; }
         public int FuelTypeId { get; set; }
         public int MarkaId { get; set; }
+        public int CategoryId { get; set; }
         public IFormFile MainPhoto { get; set; }
         public ICollection<IFormFile>? Photos { get; set; }
         public ICollection<int>? FeatureIds { get; set; }

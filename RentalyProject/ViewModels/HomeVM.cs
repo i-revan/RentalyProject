@@ -5,5 +5,6 @@ namespace RentalyProject.ViewModels
     public class HomeVM
     {
         public IEnumerable<BodyType> BodyTypes { get; set; }
+        public IEnumerable<Car> Cars { get; set; }
     }
 }

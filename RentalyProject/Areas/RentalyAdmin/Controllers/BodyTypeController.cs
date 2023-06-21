@@ -62,7 +62,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             BodyType bodyType = await _context.BodyTypes.FirstOrDefaultAsync(m => m.Id == id);
             if (bodyType is null) throw new NotFoundException("There is no body type has this id or it was deleted");
-            if(await _context.BodyTypes.AnyAsync(b=>b.Name == bodyTypeVM.Name))
+            if(await _context.BodyTypes.AnyAsync(b=>b.Name == bodyTypeVM.Name && b.Id!=id))
             {
                 ModelState.AddModelError("Name","There already exists a body type has this name");
                 return View(bodyTypeVM);

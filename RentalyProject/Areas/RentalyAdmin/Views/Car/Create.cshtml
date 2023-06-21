@@ -81,6 +81,13 @@
                                     <span class="text-danger" asp-validation-for="FuelTypeId"></span>
                                 </div>
                                 <div class="form-group">
+                                    <label asp-for="CategoryId">Category</label>
+                                    <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(ViewBag.Categories,nameof(Category.Id),nameof(Category.Name))">
+                                        <option disabled selected>Select Category please</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="CategoryId"></span>
+                                </div>
+                                <div class="form-group">
                                     <label asp-for="FeatureIds">Features</label>
                                     <select asp-for="FeatureIds" class="form-control" asp-items="new SelectList(ViewBag.Features,nameof(Feature.Id),nameof(Feature.Name))">
                                         
