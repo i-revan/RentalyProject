@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
+using RentalyProject.Models;
 using RentalyProject.ViewModels;
 
 namespace RentalyProject.Controllers
@@ -26,6 +27,15 @@ namespace RentalyProject.Controllers
                 .AsEnumerable()
             };
             return View(homeVM);
+        }
+        public IActionResult Cars()
+        {
+            IEnumerable<Car> Cars = _context.Cars
+                .Include(c => c.Marka)
+                .Include(c => c.CarImages)
+                .Include(c => c.BodyType)
+                .AsEnumerable();
+            return View(Cars);
         }
         public IActionResult Favorite()
         {

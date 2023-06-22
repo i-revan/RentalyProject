@@ -1,0 +1,153 @@
+﻿@using RentalyProject.ViewModels.Cars;
+
+@model UpdateCarVM
+<div class="container-fluid page-body-wrapper">
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="forms-sample" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label asp-for="Seats">Number of seats</label>
+                                    <input asp-for="Seats" class="form-control" placeholder="Enter the number of seats">
+                                    <span class="text-danger" asp-validation-for="Seats"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Doors">Number of doors</label>
+                                    <input asp-for="Doors" class="form-control" placeholder="Enter the number of doors">
+                                    <span class="text-danger" asp-validation-for="Doors"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Luggage"></label>
+                                    <input asp-for="Luggage" class="form-control" placeholder="Luggage">
+                                    <span class="text-danger" asp-validation-for="Luggage"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="EngineCapacity">Engine Capacity</label>
+                                    <input asp-for="EngineCapacity" class="form-control" placeholder="Engine Capacity">
+                                    <span class="text-danger" asp-validation-for="EngineCapacity"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Year">Year</label>
+                                    <input asp-for="Year" class="form-control" placeholder="Year">
+                                    <span class="text-danger" asp-validation-for="Year"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Milleage">Milleage</label>
+                                    <input asp-for="Milleage" class="form-control" placeholder="Milleage">
+                                    <span class="text-danger" asp-validation-for="Milleage"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Transmission">Transmission</label>
+                                    <input asp-for="Transmission" class="form-control" placeholder="Transmission">
+                                    <span class="text-danger" asp-validation-for="Transmission"></span>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label asp-for="FuelEconomy">Fuel Economy</label>
+                                        <input asp-for="FuelEconomy" class="form-control" placeholder="Fuel Economy">
+                                        <span class="text-danger" asp-validation-for="FuelEconomy"></span>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label asp-for="RentPrice">Rent Price</label>
+                                        <input asp-for="RentPrice" class="form-control" placeholder="RentPrice">
+                                        <span class="text-danger" asp-validation-for="RentPrice"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="BodyTypeId">Body Type</label>
+                                    <select asp-for="BodyTypeId" class="form-control" asp-items="new SelectList(ViewBag.BodyTypes,nameof(BodyType.Id),nameof(BodyType.Name))">
+                                        <option disabled selected>Select Body Type please</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="BodyTypeId"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="MarkaId">Marka</label>
+                                    <select asp-for="MarkaId" class="form-control" asp-items="new SelectList(ViewBag.Markas,nameof(Marka.Id),nameof(Marka.Name))">
+                                        <option disabled selected>Select Marka please</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="MarkaId"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FuelTypeId">Fuel Type</label>
+                                    <select asp-for="FuelTypeId" class="form-control" asp-items="new SelectList(ViewBag.FuelTypes,nameof(FuelType.Id),nameof(FuelType.Name))">
+                                        <option disabled selected>Select Fuel Type please</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="FuelTypeId"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CategoryId">Category</label>
+                                    <select asp-for="CategoryId" class="form-control" asp-items="new SelectList(ViewBag.Categories,nameof(Category.Id),nameof(Category.Name))">
+                                        <option disabled selected>Select Category please</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="CategoryId"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FeatureIds">Features</label>
+                                    <select asp-for="FeatureIds" class="form-control" asp-items="new SelectList(ViewBag.Features,nameof(Feature.Id),nameof(Feature.Name))">
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="FeatureIds"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Description">Description</label>
+                                    <input asp-for="Description" class="form-control" placeholder="Description">
+                                    <span class="text-danger" asp-validation-for="Description"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <img style="width:400px;height:400px;object-fit:contain" src="~/assets//images/cars/@Model.CarImageVMs.FirstOrDefault(ci=>ci.IsMain==true).ImageUrl" />
+                                        </div>
+                                    </div>
+                                    <label asp-for="MainPhoto">Main Photo</label>
+                                    <input asp-for="MainPhoto" class="form-control" accept="image/*">
+                                    <span class="text-danger" asp-validation-for="MainPhoto"></span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        @foreach (CarImageVM item in Model.CarImageVMs.Where(ci => ci.IsMain == false).ToList())
+                                        {
+                                            <div class="col-3 position-relative">
+                                                <img style="width:100%;height150px;" src="~/assets/images/cars/@item.ImageUrl" />
+                                                <input type="hidden" name="ImageIds" value="@item.Id" class="form-control">
+                                                <button type="button" style="right:8px;" class="btn btn-danger position-absolute custom-delete">X</button>
+                                            </div>
+                                        }
+                                    </div>
+                                    <label asp-for="Photos">Additional Photos</label>
+                                    <input asp-for="Photos" class="form-control" accept="image/*">
+                                    <span class="text-danger" asp-validation-for="Photos"></span>
+                                </div>
+                                <button type="submit" class="btn btn-primary me-2">Update</button>
+                                <a asp-action="index" asp-controller="car" class="btn btn-light">Cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+</div>
+@section DeletePhotos{
+    <script>
+        let btns = document.querySelectorAll(".custom-delete")
+        btns.forEach(b => {
+            b.addEventListener("click", function () {
+                b.parentElement.remove()
+            })
+        })
+    </script>
+}
+
+
+

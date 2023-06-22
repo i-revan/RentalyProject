@@ -77,12 +77,8 @@
                                         <a class="menu-item" asp-controller="home" asp-action="index">Home</a>
                                     </li>
                                     <li>
-                                        <a class="menu-item" href="cars.html">Cars</a>
-                                        <ul>
-                                            <li><a class="menu-item" href="cars.html">Cars List 1</a></li>
-                                            <li><a class="menu-item" href="cars-list.html">Cars List 2</a></li>
-                                            <li><a class="menu-item" href="car-single.html">Cars Single</a></li>
-                                        </ul>
+                                        <a class="menu-item" asp-controller="home" asp-action="cars">Cars</a>
+                                        
                                     </li>
                                     <li><a class="menu-item" href="booking.html">Booking</a></li>
                                     @if (User.Identity.IsAuthenticated)

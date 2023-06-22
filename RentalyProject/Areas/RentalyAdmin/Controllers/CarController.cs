@@ -10,7 +10,7 @@ using RentalyProject.ViewModels.Cars;
 namespace RentalyProject.Areas.RentalyAdmin.Controllers
 {
     [Area("RentalyAdmin")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     [AutoValidateAntiforgeryToken]
     public class CarController : Controller
     {
@@ -18,14 +18,17 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
         private readonly IWebHostEnvironment _env;
         private static readonly string _folder = @"assets/images/cars";
 
-        public CarController(AppDbContext context,IWebHostEnvironment env)
+        public CarController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
         }
-        public IActionResult Index(int take=3,int page=1)
+        public IActionResult Index(int take = 3, int page = 1)
         {
-            IEnumerable<Car> cars = _context.Cars.Skip((page - 1) * take).Take(take).Include(c=>c.Marka);
+            IEnumerable<Car> cars = _context.Cars.Skip((page - 1) * take).Take(take)
+                .Include(c => c.Marka)
+                .Include(c=>c.CarImages)
+                .Include(c=>c.CarFeatures).ThenInclude(cf=>cf.Feature);
             ViewBag.TotalPage = (int)Math.Ceiling((double)_context.Cars.Count() / take);
             ViewBag.CurrentPage = page;
             return View(cars);
@@ -43,13 +46,15 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCarVM carVM)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
                 ViewBag.Markas = _context.Markas.AsEnumerable();
                 ViewBag.Features = _context.Features.AsEnumerable();
                 ViewBag.Colors = _context.Colors.AsEnumerable();
                 ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                ViewBag.Categories = _context.Categories.AsEnumerable();
+
                 return View();
             }
             Car car = new Car()
@@ -75,27 +80,33 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 CarColors = new List<CarColor>(),
                 CarImages = new List<CarImages>()
             };
-            foreach (int featureId in carVM.FeatureIds)
+            if (!(carVM.FeatureIds is null))
             {
-                if (!(await _context.Features.AnyAsync(b => b.Id == featureId)))
+                foreach (int featureId in carVM.FeatureIds)
                 {
-                    ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
-                    ViewBag.Markas = _context.Markas.AsEnumerable();
-                    ViewBag.Features = _context.Features.AsEnumerable();
-                    ViewBag.Colors = _context.Colors.AsEnumerable();
-                    ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
-                    ModelState.AddModelError("FeatureIds", $"There is no feature that has {featureId} id");
-                    return View();
+                    if (!(await _context.Features.AnyAsync(b => b.Id == featureId)))
+                    {
+                        ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                        ViewBag.Markas = _context.Markas.AsEnumerable();
+                        ViewBag.Features = _context.Features.AsEnumerable();
+                        ViewBag.Colors = _context.Colors.AsEnumerable();
+                        ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                        ViewBag.Categories = _context.Categories.AsEnumerable();
+
+                        ModelState.AddModelError("FeatureIds", $"There is no feature that has {featureId} id");
+                        return View();
+                    }
+                    CarFeature carFeature = new CarFeature()
+                    {
+                        FeatureId = featureId,
+                        CreatedAt = DateTime.Now,
+                        Car = car
+                    };
+                    car.CarFeatures.Add(carFeature);
                 }
-                CarFeature carFeature = new CarFeature()
-                {
-                    FeatureId = featureId,
-                    CreatedAt = DateTime.Now,
-                    Car = car
-                };
-                car.CarFeatures.Add(carFeature);
             }
-            for(int i = 0; i < carVM.ColorIds.Count; i++)
+
+            for (int i = 0; i < carVM.ColorIds.Count; i++)
             {
                 if (!(await _context.Colors.AnyAsync(b => b.Id == carVM.ColorIds[i])))
                 {
@@ -104,6 +115,8 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                     ViewBag.Features = _context.Features.AsEnumerable();
                     ViewBag.Colors = _context.Colors.AsEnumerable();
                     ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                    ViewBag.Categories = _context.Categories.AsEnumerable();
+
                     ModelState.AddModelError("FeatureIds", $"There is no color that has {carVM.ColorIds[i]} id");
                     return View();
                 }
@@ -130,52 +143,309 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                     car.CarColors.Add(carColor);
                 }
             }
+
+            //Esas seklin yoxlanilmasi ve yaradilmasi
+
+            if (!carVM.MainPhoto.CheckFileType("image/"))
+            {
+                ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                ViewBag.Markas = _context.Markas.AsEnumerable();
+                ViewBag.Features = _context.Features.AsEnumerable();
+                ViewBag.Colors = _context.Colors.AsEnumerable();
+                ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                ViewBag.Categories = _context.Categories.AsEnumerable();
+
+                ModelState.AddModelError("MainPhoto", "File format is not correct!");
+                return View();
+            }
+            if (!carVM.MainPhoto.CheckFileSize(500))
+            {
+                ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                ViewBag.Markas = _context.Markas.AsEnumerable();
+                ViewBag.Features = _context.Features.AsEnumerable();
+                ViewBag.Colors = _context.Colors.AsEnumerable();
+                ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                ViewBag.Categories = _context.Categories.AsEnumerable();
+
+                ModelState.AddModelError("MainPhoto", "File size must be 500 kb or less!");
+                return View();
+            }
+            CarImages carImage = new CarImages()
+            {
+                ImageUrl = await carVM.MainPhoto.CreateFileAsync(_env.WebRootPath, _folder),
+                Car = car,
+                IsMain = true,
+                CreatedAt = DateTime.Now,
+            };
+            car.CarImages.Add(carImage);
+            if (carVM.Photos != null)
+            {
+                TempData["PhotoErrors"] = "";
+                foreach (IFormFile photo in carVM.Photos)
+                {
+                    if (!photo.CheckFileType("image/"))
+                    {
+                        TempData["PhotoErrors"] += $"{photo.FileName} has not valid file format\t";
+                        continue;
+                    }
+                    if (!photo.CheckFileSize(500))
+                    {
+                        TempData["PhotoErors"] += $"{photo.FileName} has not valid length";
+                        continue;
+                    }
+                    CarImages additional = new CarImages()
+                    {
+                        ImageUrl = await photo.CreateFileAsync(_env.WebRootPath, _folder),
+                        Car = car,
+                        IsMain = false,
+                        CreatedAt = DateTime.Now,
+                    };
+                    car.CarImages.Add(additional);
+                }
+            }
+            await _context.Cars.AddAsync(car);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Update(int? id)
+        {
+            if(id is null || id<1) throw new BadRequestException("Id is not found");
+            Car car = await _context.Cars.Where(c => c.Id == id)
+                .Include(c=>c.CarFeatures)
+                .Include(c=>c.CarImages)
+                .FirstOrDefaultAsync();
+            if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
+            UpdateCarVM carVM = new UpdateCarVM()
+            {
+                Seats = car.Seats,
+                Doors = car.Doors,
+                Luggage = car.Luggage,
+                EngineCapacity = car.EngineCapacity,
+                Year = car.Year,
+                Milleage = car.Milleage,
+                Transmission = car.Transmission,
+                FuelEconomy = car.FuelEconomy,
+                RentPrice = car.RentPrice,
+                Description = car.Description,
+                CategoryId = car.CategoryId,
+                MarkaId = car.MarkaId,
+                BodyTypeId = car.BodyTypeId,
+                FuelTypeId = car.FuelTypeId,
+                FeatureIds = car.CarFeatures.Select(cf=>cf.FeatureId).ToList(),
+                CarImageVMs = new List<CarImageVM>()
+            };
+            foreach(CarImages image in car.CarImages)
+            {
+                CarImageVM imageVM = new CarImageVM()
+                {
+                    Id = image.Id,
+                    ImageUrl = image.ImageUrl,
+                    IsMain = image.IsMain
+                };
+                carVM.CarImageVMs.Add(imageVM);
+            }
+            ViewBag.Categories = _context.Categories.AsEnumerable();
+            ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+            ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+            ViewBag.Markas = _context.Markas.AsEnumerable();
+            ViewBag.Features = _context.Features.AsEnumerable();
+            return View(carVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(int? id,UpdateCarVM carVM)
+        {
+            if (id is null || id < 1) throw new BadRequestException("Id is not found");
+            Car existed = await _context.Cars.Where(c => c.Id == id)
+                .Include(c => c.CarFeatures)
+                .Include(c=>c.CarImages)
+                .FirstOrDefaultAsync();
+            if (existed is null) throw new NotFoundException("There is no car has this id or it was deleted");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = _context.Categories.AsEnumerable();
+                ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                ViewBag.Markas = _context.Markas.AsEnumerable();
+                ViewBag.Features = _context.Features.AsEnumerable();
+                
+                return View(carVM);
+            }
+            if(!(await _context.Categories.AnyAsync(c=>c.Id == carVM.CategoryId)))
+            {
+                ViewBag.Categories = _context.Categories.AsEnumerable();
+                ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                ViewBag.Markas = _context.Markas.AsEnumerable();
+                ViewBag.Features = _context.Features.AsEnumerable();
+                ViewBag.Colors = _context.Colors.AsEnumerable();
+                ModelState.AddModelError("CategoryId", "There is no category has this id or ot was deleted");
+                return View(carVM);
+            }
+            if(!(await _context.BodyTypes.AnyAsync(bt=>bt.Id == carVM.BodyTypeId)))
+            {
+                ViewBag.Categories = _context.Categories.AsEnumerable();
+                ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                ViewBag.Markas = _context.Markas.AsEnumerable();
+                ViewBag.Features = _context.Features.AsEnumerable();
+                ViewBag.Colors = _context.Colors.AsEnumerable();
+                ModelState.AddModelError("BodyTypeid", "There is no body type has this id or ot was deleted");
+                return View(carVM);
+            }
+            if(!(await _context.FuelTypes.AnyAsync(ft => ft.Id == carVM.FuelTypeId)))
+            {
+                ViewBag.Categories = _context.Categories.AsEnumerable();
+                ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                ViewBag.Markas = _context.Markas.AsEnumerable();
+                ViewBag.Features = _context.Features.AsEnumerable();
+                ViewBag.Colors = _context.Colors.AsEnumerable();
+                ModelState.AddModelError("FuelTypeId", "There is no fuel type has this id or ot was deleted");
+                return View(carVM);
+            }
+            if(!(await _context.Markas.AnyAsync(m=>m.Id == carVM.MarkaId)))
+            {
+                ViewBag.Categories = _context.Categories.AsEnumerable();
+                ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                ViewBag.Markas = _context.Markas.AsEnumerable();
+                ViewBag.Features = _context.Features.AsEnumerable();
+                ViewBag.Colors = _context.Colors.AsEnumerable();
+                ModelState.AddModelError("MarkaId", "There is no marka has this id or ot was deleted");
+                return View(carVM);
+            }
+            existed.MarkaId = carVM.MarkaId;
+            existed.Seats = carVM.Seats;
+            existed.Doors = carVM.Doors;
+            existed.Luggage = carVM.Luggage;
+            existed.Transmission = existed.Transmission;
+            existed.RentPrice = carVM.RentPrice;
+            existed.Milleage = carVM.Milleage;
+            existed.Year = carVM.Year;
+            existed.Description = carVM.Description;
+            existed.EngineCapacity = carVM.EngineCapacity;
+            existed.FuelEconomy = carVM.FuelEconomy;
+            existed.CategoryId = carVM.CategoryId;
+            existed.MarkaId = carVM.MarkaId;
+            existed.FuelTypeId = carVM.FuelTypeId;
+            existed.BodyTypeId = carVM.BodyTypeId;
+
             if(carVM.MainPhoto != null)
             {
                 if (!carVM.MainPhoto.CheckFileType("image/"))
                 {
+                    ViewBag.Categories = _context.Categories.AsEnumerable();
                     ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                    ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
                     ViewBag.Markas = _context.Markas.AsEnumerable();
                     ViewBag.Features = _context.Features.AsEnumerable();
                     ViewBag.Colors = _context.Colors.AsEnumerable();
-                    ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
-                    ModelState.AddModelError("MainPhoto", "File format is not correct!");
-                    return View();
+                    ModelState.AddModelError("MainPhoto", "Invalid file format");
+                    return View(carVM);
                 }
                 if (!carVM.MainPhoto.CheckFileSize(500))
                 {
+                    ViewBag.Categories = _context.Categories.AsEnumerable();
                     ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                    ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
                     ViewBag.Markas = _context.Markas.AsEnumerable();
                     ViewBag.Features = _context.Features.AsEnumerable();
                     ViewBag.Colors = _context.Colors.AsEnumerable();
-                    ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
-                    ModelState.AddModelError("MainPhoto", "File size must be 500 kb or less!");
-                    return View();
+                    ModelState.AddModelError("MainPhoto", "Photo length must be or less than 500 kb");
+                    return View(carVM);
                 }
+                var mainImage = existed.CarImages.FirstOrDefault(ci => ci.IsMain == true);
+                mainImage.ImageUrl.DeleteFile(_env.WebRootPath, _folder);
+                existed.CarImages.Remove(mainImage);
                 CarImages carImage = new CarImages()
                 {
-                    ImageUrl = await carVM.MainPhoto.CreateFileAsync(_env.WebRootPath,_folder),
-                    Car = car,
-                    IsMain = true,
+                    CarId = existed.Id,
+                    ImageUrl = await carVM.MainPhoto.CreateFileAsync(_env.WebRootPath, _folder),
+                    IsMain =true
+                };
+                existed.CarImages.Add(carImage);
+            }
+            
+            List<CarImages> removePhotoList = existed.CarImages.Where(ci=>!carVM.ImageIds.Contains(ci.Id)&& ci.IsMain==false).ToList();
+            foreach(CarImages carImage in removePhotoList)
+            {
+                carImage.ImageUrl.DeleteFile(_env.WebRootPath,_folder);
+                existed.CarImages.Remove(carImage);
+            }
+            TempData["PhotoErrors"] = "";
+            foreach (IFormFile photo in carVM.Photos)
+            {
+                if (!photo.CheckFileType("image/"))
+                {
+                    TempData["PhotoErrors"] += $"{photo.FileName} has not valid file format\t";
+                    continue;
+                }
+                if (!photo.CheckFileSize(500))
+                {
+                    TempData["PhotoErors"] += $"{photo.FileName} has not valid length";
+                    continue;
+                }
+                CarImages additional = new CarImages()
+                {
+                    ImageUrl = await photo.CreateFileAsync(_env.WebRootPath, _folder),
+                    CarId = existed.Id,
+                    IsMain = false,
                     CreatedAt = DateTime.Now,
                 };
-                car.CarImages.Add(carImage);
+                existed.CarImages.Add(additional);
             }
-            await _context.Cars.AddAsync(car);
+            if (carVM.FeatureIds != null)
+            {
+                List<int> createList = carVM.FeatureIds.Where(f => !existed.CarFeatures.Exists(cf => cf.FeatureId == f)).ToList();
+                foreach(int featureId in createList)
+                {
+                    if(!(await _context.Features.AnyAsync(f=>f.Id == featureId)))
+                    {
+                        ViewBag.Categories = _context.Categories.AsEnumerable();
+                        ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
+                        ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
+                        ViewBag.Markas = _context.Markas.AsEnumerable();
+                        ViewBag.Features = _context.Features.AsEnumerable();
+                        ViewBag.Colors = _context.Colors.AsEnumerable();
+                        ModelState.AddModelError("FeatureIds", $"There is no feature has {featureId} id or ot was deleted");
+                        return View(carVM);
+                    }
+                    CarFeature carFeature = new CarFeature()
+                    {
+                        FeatureId = featureId,
+                        CarId = existed.Id,
+                        UpdatedAt = DateTime.Now
+                    };
+                    existed.CarFeatures.Add(carFeature);
+                }
+                List<CarFeature> removeList = existed.CarFeatures.Where(cf => !carVM.FeatureIds.Contains(cf.FeatureId)).ToList();
+                if(removeList != null)
+                {
+                    _context.CarFeatures.RemoveRange(removeList);
+                }
+            }
+            else
+            {
+                List<CarFeature> removed = existed.CarFeatures.ToList();
+                _context.CarFeatures.RemoveRange(removed);
+            }
+
+            existed.UpdatedAt = DateTime.Now;
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars.Where(c => c.Id == id)
-                .Include(c=>c.Marka)
-                .Include(c=>c.BodyType)
-                .Include(c=>c.FuelType)
-                .Include(c=>c.Category)
-                .Include(c=>c.CarColors).ThenInclude(cc=>cc.Color)
-                .Include(c=>c.CarFeatures).ThenInclude(cf=>cf.Feature)
-                .Include(c=>c.CarImages)
+                .Include(c => c.Marka)
+                .Include(c => c.BodyType)
+                .Include(c => c.FuelType)
+                .Include(c => c.Category)
+                .Include(c => c.CarColors).ThenInclude(cc => cc.Color)
+                .Include(c => c.CarFeatures).ThenInclude(cf => cf.Feature)
+                .Include(c => c.CarImages)
                 .FirstOrDefaultAsync();
             if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
             return View(car);

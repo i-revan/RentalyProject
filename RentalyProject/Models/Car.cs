@@ -17,7 +17,7 @@ namespace RentalyProject.Models
         public decimal RentPrice { get; set; }
         public bool IsAvailable { get; set; }
         public ICollection<CarImages> CarImages { get; set; }
-        public ICollection<CarFeature> CarFeatures { get; set; }
+        public List<CarFeature> CarFeatures { get; set; }
         public int BodyTypeId { get; set; }
         public BodyType BodyType { get; set; }
         public int FuelTypeId { get; set; }

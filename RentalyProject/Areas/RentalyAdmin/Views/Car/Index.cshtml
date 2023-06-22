@@ -8,6 +8,7 @@
             <h4 class="card-title">Cars</h4>
             <a asp-controller="car" asp-action="create" class="btn btn-success">Create Car</a>
             <div class="table-responsive">
+                <span class="text-danger">@TempData["PhotoErrors"]</span>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -15,7 +16,13 @@
                                 No
                             </th>
                             <th>
+                                Vehicle
+                            </th>
+                            <th>
                                 Name
+                            </th>
+                            <th>
+                                Features
                             </th>
                             <th>
                                 Settings
@@ -31,7 +38,23 @@
                                     @count
                                 </td>
                                 <td>
+                                    <img style="object-fit: cover" src="~/assets/images/cars/@item.CarImages.FirstOrDefault(c=>c.IsMain==true).ImageUrl"/>
+                                </td>
+                                <td>
                                     @item.Marka.Name
+                                </td>
+                                <td>
+                                    @if(item.CarFeatures.Count==0)
+                                    {
+                                        <p>No feature</p>
+                                    }
+                                    else
+                                    {
+                                        foreach (Feature feature in item.CarFeatures.Select(cf => cf.Feature))
+                                        {
+                                            <p>@feature.Name</p>
+                                        }
+                                    }
                                 </td>
                                 <td>
                                     <a asp-controller="car" asp-action="update" asp-route-id="@item.Id" class="btn btn-warning"><i class="mdi mdi-pen"></i></a>

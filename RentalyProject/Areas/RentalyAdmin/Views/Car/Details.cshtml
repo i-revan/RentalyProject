@@ -59,6 +59,9 @@
                             <th>
                                 Create Time
                             </th>
+                            <th>
+                                Last Update
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -117,6 +120,16 @@
                             </td>
                             <td>
                                 @Model.CreatedAt.ToString("dd MMMM yyyy hh:mm tt")
+                            </td>
+                            <td>
+                                @if (Model.UpdatedAt is null)
+                                {
+                                    <p>No update yet</p>
+                                }
+                                else
+                                {
+                                    @Model.UpdatedAt.Value.ToString("dd MMMM yyyy hh:mm tt")
+                                }
                             </td>
                         </tr>
 

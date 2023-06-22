@@ -1,4 +1,5 @@
 ﻿@using RentalyProject.ViewModels.Models;
+
 @model ModelVM
 <div class="container-fluid page-body-wrapper">
 
@@ -10,21 +11,14 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Create Model</h4>
-                            <a asp-controller="model" asp-action="index" class="btn btn-dark my-2">Back</a>
-                            <form class="forms-sample" method="post">
+                            <form class="forms-sample" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label asp-for="Name">Name</label>
-                                    <input asp-for="Name" placeholder="Name">
+                                    <input asp-for="Name" class="form-control" placeholder="Name">
                                     <span class="text-danger" asp-validation-for="Name"></span>
                                 </div>
-                                <div class="form-group">
-                                    <select asp-for="MarkaId" class="form-control" asp-items="new SelectList(ViewBag.Markas,nameof(Marka.Id),nameof(Marka.Name))">
-                                        <option disabled selected>Select Marka</option>
-                                    </select>
-                                    <span class="text-danger" asp-validation-for="MarkaId"></span>
-                                </div>
-                                <button type="submit" class="btn btn-primary me-2">Submit</button>
-                                <button asp-controller="model" asp-action="index" class="btn btn-light">Cancel</button>
+                                <button type="submit" class="btn btn-primary me-2">Create</button>
+                                <a asp-action="index" asp-controller="model" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
                     </div>
@@ -38,3 +32,4 @@
     </div>
     <!-- main-panel ends -->
 </div>
+

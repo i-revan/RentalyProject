@@ -384,7 +384,7 @@
                                         </div>
                                         <div class="d-price">
                                             Daily rate from <span>$@String.Format("{0:#,##0}", car.RentPrice)</span>
-                                            <a class="btn-main" href="car-single.html">Rent Now</a>
+                                            <a class="btn-main" asp-controller="rent" asp-action="details" asp-route-id="@car.Id">Rent Now</a>
                                         </div>
                                     </div>
                                 </div>
