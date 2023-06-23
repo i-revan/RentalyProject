@@ -89,9 +89,13 @@
                                                 <li><a class="menu-item" href="account-dashboard.html">Dashboard</a></li>
                                                 <li><a class="menu-item" href="account-profile.html">My Profile</a></li>
                                                 <li><a class="menu-item" href="account-booking.html">My Orders</a></li>
-                                                <li><a class="menu-item" asp-controller="home" asp-action="favorite">My Favorite Cars</a></li>
+                                                <li><a class="menu-item" asp-controller="favorite" asp-action="index">My Favorite Cars</a></li>
                                             </ul>
                                         </li>
+                                    }
+                                    else
+                                    {
+                                        <li><a class="menu-item" asp-controller="favorite" asp-action="index">My Favorite Cars</a></li>
                                     }
                                     <li>
                                         <a class="menu-item" href="#">Pages</a>

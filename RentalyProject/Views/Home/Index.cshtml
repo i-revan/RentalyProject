@@ -249,7 +249,7 @@
 
             <div class="de-marquee-list">
                 <div class="d-item">
-                    @foreach(BodyType type in Model.BodyTypes)
+                    @foreach (BodyType type in Model.BodyTypes)
                     {
                         <span class="d-item-txt">@type.Name</span>
                         <span class="d-item-display">
@@ -373,9 +373,42 @@
                                 <div class="d-info">
                                     <div class="d-text">
                                         <h4>@car.Marka.Name </h4>
-                                        <div class="d-item_like">
-                                            <i class="fa fa-heart"></i><span>@car.Like</span>
-                                        </div>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            if (!(Model.UserFavorites is null))
+                                            {
+                                                bool result = false;
+                                                foreach (FavoriteCar favoriteCar in Model.UserFavorites)
+                                                {
+                                                    if (favoriteCar.CarId == car.Id)
+                                                    {
+                                                        result = true;
+                                                        <div class="d-item_like">
+                                                            <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id"><i class="fa fa-heart active"></i></a><span>@car.Like</span>
+                                                        </div>
+                                                    }
+                                                }
+                                                if (!result)
+                                                {
+                                                    <div class="d-item_like">
+                                                        <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id"><i class="fa fa-heart"></i></a><span>@car.Like</span>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="d-item_like">
+                                                    <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id"><i class="fa fa-heart"></i></a><span>@car.Like</span>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="d-item_like">
+                                                <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id"><i class="fa fa-heart"></i></a><span>@car.Like</span>
+                                            </div>
+                                        }
+
                                         <div class="d-atr-group">
                                             <span class="d-atr"><img src="~/assets/images/icons/1.svg" alt="">@car.Seats</span>
                                             <span class="d-atr"><img src="~/assets/images/icons/2.svg" alt="">@car.Luggage</span>
@@ -393,7 +426,7 @@
                     }
 
 
-                    
+
 
                 </div>
 

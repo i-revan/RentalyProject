@@ -27,8 +27,8 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
         {
             IEnumerable<Car> cars = _context.Cars.Skip((page - 1) * take).Take(take)
                 .Include(c => c.Marka)
-                .Include(c=>c.CarImages)
-                .Include(c=>c.CarFeatures).ThenInclude(cf=>cf.Feature);
+                .Include(c => c.CarImages)
+                .Include(c => c.CarFeatures).ThenInclude(cf => cf.Feature);
             ViewBag.TotalPage = (int)Math.Ceiling((double)_context.Cars.Count() / take);
             ViewBag.CurrentPage = page;
             return View(cars);
@@ -209,10 +209,10 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
         }
         public async Task<IActionResult> Update(int? id)
         {
-            if(id is null || id<1) throw new BadRequestException("Id is not found");
+            if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars.Where(c => c.Id == id)
-                .Include(c=>c.CarFeatures)
-                .Include(c=>c.CarImages)
+                .Include(c => c.CarFeatures)
+                .Include(c => c.CarImages)
                 .FirstOrDefaultAsync();
             if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
             UpdateCarVM carVM = new UpdateCarVM()
@@ -231,10 +231,10 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 MarkaId = car.MarkaId,
                 BodyTypeId = car.BodyTypeId,
                 FuelTypeId = car.FuelTypeId,
-                FeatureIds = car.CarFeatures.Select(cf=>cf.FeatureId).ToList(),
+                FeatureIds = car.CarFeatures.Select(cf => cf.FeatureId).ToList(),
                 CarImageVMs = new List<CarImageVM>()
             };
-            foreach(CarImages image in car.CarImages)
+            foreach (CarImages image in car.CarImages)
             {
                 CarImageVM imageVM = new CarImageVM()
                 {
@@ -252,12 +252,12 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             return View(carVM);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(int? id,UpdateCarVM carVM)
+        public async Task<IActionResult> Update(int? id, UpdateCarVM carVM)
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car existed = await _context.Cars.Where(c => c.Id == id)
                 .Include(c => c.CarFeatures)
-                .Include(c=>c.CarImages)
+                .Include(c => c.CarImages)
                 .FirstOrDefaultAsync();
             if (existed is null) throw new NotFoundException("There is no car has this id or it was deleted");
             if (!ModelState.IsValid)
@@ -267,10 +267,10 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
                 ViewBag.Markas = _context.Markas.AsEnumerable();
                 ViewBag.Features = _context.Features.AsEnumerable();
-                
+
                 return View(carVM);
             }
-            if(!(await _context.Categories.AnyAsync(c=>c.Id == carVM.CategoryId)))
+            if (!(await _context.Categories.AnyAsync(c => c.Id == carVM.CategoryId)))
             {
                 ViewBag.Categories = _context.Categories.AsEnumerable();
                 ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
@@ -281,7 +281,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ModelState.AddModelError("CategoryId", "There is no category has this id or ot was deleted");
                 return View(carVM);
             }
-            if(!(await _context.BodyTypes.AnyAsync(bt=>bt.Id == carVM.BodyTypeId)))
+            if (!(await _context.BodyTypes.AnyAsync(bt => bt.Id == carVM.BodyTypeId)))
             {
                 ViewBag.Categories = _context.Categories.AsEnumerable();
                 ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
@@ -292,7 +292,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ModelState.AddModelError("BodyTypeid", "There is no body type has this id or ot was deleted");
                 return View(carVM);
             }
-            if(!(await _context.FuelTypes.AnyAsync(ft => ft.Id == carVM.FuelTypeId)))
+            if (!(await _context.FuelTypes.AnyAsync(ft => ft.Id == carVM.FuelTypeId)))
             {
                 ViewBag.Categories = _context.Categories.AsEnumerable();
                 ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
@@ -303,7 +303,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ModelState.AddModelError("FuelTypeId", "There is no fuel type has this id or ot was deleted");
                 return View(carVM);
             }
-            if(!(await _context.Markas.AnyAsync(m=>m.Id == carVM.MarkaId)))
+            if (!(await _context.Markas.AnyAsync(m => m.Id == carVM.MarkaId)))
             {
                 ViewBag.Categories = _context.Categories.AsEnumerable();
                 ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
@@ -330,7 +330,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             existed.FuelTypeId = carVM.FuelTypeId;
             existed.BodyTypeId = carVM.BodyTypeId;
 
-            if(carVM.MainPhoto != null)
+            if (carVM.MainPhoto != null)
             {
                 if (!carVM.MainPhoto.CheckFileType("image/"))
                 {
@@ -361,45 +361,48 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 {
                     CarId = existed.Id,
                     ImageUrl = await carVM.MainPhoto.CreateFileAsync(_env.WebRootPath, _folder),
-                    IsMain =true
+                    IsMain = true
                 };
                 existed.CarImages.Add(carImage);
             }
-            
-            List<CarImages> removePhotoList = existed.CarImages.Where(ci=>!carVM.ImageIds.Contains(ci.Id)&& ci.IsMain==false).ToList();
-            foreach(CarImages carImage in removePhotoList)
+
+            List<CarImages> removePhotoList = existed.CarImages.Where(ci => !carVM.ImageIds.Contains(ci.Id) && ci.IsMain == false).ToList();
+            foreach (CarImages carImage in removePhotoList)
             {
-                carImage.ImageUrl.DeleteFile(_env.WebRootPath,_folder);
+                carImage.ImageUrl.DeleteFile(_env.WebRootPath, _folder);
                 existed.CarImages.Remove(carImage);
             }
-            TempData["PhotoErrors"] = "";
-            foreach (IFormFile photo in carVM.Photos)
+            if (!(carVM.Photos is null))
             {
-                if (!photo.CheckFileType("image/"))
+                TempData["PhotoErrors"] = "";
+                foreach (IFormFile photo in carVM.Photos)
                 {
-                    TempData["PhotoErrors"] += $"{photo.FileName} has not valid file format\t";
-                    continue;
+                    if (!photo.CheckFileType("image/"))
+                    {
+                        TempData["PhotoErrors"] += $"{photo.FileName} has not valid file format\t";
+                        continue;
+                    }
+                    if (!photo.CheckFileSize(500))
+                    {
+                        TempData["PhotoErors"] += $"{photo.FileName} has not valid length";
+                        continue;
+                    }
+                    CarImages additional = new CarImages()
+                    {
+                        ImageUrl = await photo.CreateFileAsync(_env.WebRootPath, _folder),
+                        CarId = existed.Id,
+                        IsMain = false,
+                        CreatedAt = DateTime.Now,
+                    };
+                    existed.CarImages.Add(additional);
                 }
-                if (!photo.CheckFileSize(500))
-                {
-                    TempData["PhotoErors"] += $"{photo.FileName} has not valid length";
-                    continue;
-                }
-                CarImages additional = new CarImages()
-                {
-                    ImageUrl = await photo.CreateFileAsync(_env.WebRootPath, _folder),
-                    CarId = existed.Id,
-                    IsMain = false,
-                    CreatedAt = DateTime.Now,
-                };
-                existed.CarImages.Add(additional);
             }
             if (carVM.FeatureIds != null)
             {
                 List<int> createList = carVM.FeatureIds.Where(f => !existed.CarFeatures.Exists(cf => cf.FeatureId == f)).ToList();
-                foreach(int featureId in createList)
+                foreach (int featureId in createList)
                 {
-                    if(!(await _context.Features.AnyAsync(f=>f.Id == featureId)))
+                    if (!(await _context.Features.AnyAsync(f => f.Id == featureId)))
                     {
                         ViewBag.Categories = _context.Categories.AsEnumerable();
                         ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
@@ -419,7 +422,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                     existed.CarFeatures.Add(carFeature);
                 }
                 List<CarFeature> removeList = existed.CarFeatures.Where(cf => !carVM.FeatureIds.Contains(cf.FeatureId)).ToList();
-                if(removeList != null)
+                if (removeList != null)
                 {
                     _context.CarFeatures.RemoveRange(removeList);
                 }

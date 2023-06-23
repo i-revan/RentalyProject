@@ -27,6 +27,7 @@ namespace RentalyProject.Models
         public Marka Marka { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public ICollection<FavoriteCar> FavoriteCars { get; set; }
 
     }
 }

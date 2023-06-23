@@ -499,6 +499,39 @@ namespace RentalyProject.Migrations
                     b.ToTable("Colors");
                 });
 
+            modelBuilder.Entity("RentalyProject.Models.FavoriteCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("RentPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserid");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("FavoriteCars");
+                });
+
             modelBuilder.Entity("RentalyProject.Models.Feature", b =>
                 {
                     b.Property<int>("Id")
@@ -594,6 +627,55 @@ namespace RentalyProject.Migrations
                     b.HasIndex("MarkaId");
 
                     b.ToTable("Models");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AppUserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DropOffLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PickUpDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PickUpLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId1");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.Setting", b =>
@@ -777,6 +859,25 @@ namespace RentalyProject.Migrations
                     b.Navigation("Car");
                 });
 
+            modelBuilder.Entity("RentalyProject.Models.FavoriteCar", b =>
+                {
+                    b.HasOne("RentalyProject.Models.AppUser", "AppUser")
+                        .WithMany("FavoriteCars")
+                        .HasForeignKey("AppUserid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RentalyProject.Models.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Car");
+                });
+
             modelBuilder.Entity("RentalyProject.Models.Model", b =>
                 {
                     b.HasOne("RentalyProject.Models.Marka", "Marka")
@@ -786,6 +887,30 @@ namespace RentalyProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Marka");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.Reservation", b =>
+                {
+                    b.HasOne("RentalyProject.Models.AppUser", "AppUser")
+                        .WithMany("Reservations")
+                        .HasForeignKey("AppUserId1");
+
+                    b.HasOne("RentalyProject.Models.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Car");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.AppUser", b =>
+                {
+                    b.Navigation("FavoriteCars");
+
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.BodyType", b =>

@@ -6,5 +6,6 @@ namespace RentalyProject.ViewModels
     {
         public IEnumerable<BodyType> BodyTypes { get; set; }
         public IEnumerable<Car> Cars { get; set; }
+        public IEnumerable<FavoriteCar>? UserFavorites { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
@@ -6,13 +8,16 @@ using RentalyProject.Utilities.Exceptions;
 
 namespace RentalyProject.Controllers
 {
+    [Authorize]
     public class RentController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public RentController(AppDbContext context)
+        public RentController(AppDbContext context,UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Details(int? id)
         {
@@ -26,7 +31,11 @@ namespace RentalyProject.Controllers
                 .Include(c=>c.CarColors).ThenInclude(cc=>cc.Color)
                 .FirstOrDefaultAsync(c => c.Id == id);
             if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
+
+            //AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            //if (user is null) throw new NotFoundException("User is not found");
             return View(car);
         }
+
     }
 }

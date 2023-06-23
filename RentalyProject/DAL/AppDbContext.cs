@@ -23,5 +23,7 @@ namespace RentalyProject.DAL
         public DbSet<FuelType> FuelTypes { get; set; }
         public DbSet<Marka> Markas { get; set; }
         public DbSet<Model> Models { get; set; }
+        public DbSet<FavoriteCar> FavoriteCars { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }

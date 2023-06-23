@@ -193,7 +193,7 @@
                                         <div class="d-text">
                                             <h4>@car.Marka.Name Renegade</h4>
                                             <div class="d-item_like">
-                                                <i class="fa fa-heart"></i><span>@car.Like</span>
+                                                <a asp-controller="favorite" asp-action="addfavorite" asp-route-id="@car.Id"><i class="fa fa-heart"></i></a><span>@car.Like</span>
                                             </div>
                                             <div class="d-atr-group">
                                                 <span class="d-atr"><img src="~/assets/images/icons/1.svg" alt="">@car.Seats</span>

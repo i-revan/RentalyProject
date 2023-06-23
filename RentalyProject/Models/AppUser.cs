@@ -6,5 +6,7 @@ namespace RentalyProject.Models
     {
         public string Name { get; set; }
         public string Surname { get; set; }
+        public ICollection<FavoriteCar> FavoriteCars { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }
