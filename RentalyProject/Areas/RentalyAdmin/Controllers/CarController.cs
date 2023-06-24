@@ -73,7 +73,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 MarkaId = carVM.MarkaId,
                 BodyTypeId = carVM.BodyTypeId,
                 CategoryId = carVM.CategoryId,
-                IsAvailable = false,
+                IsAvailable = true,
                 Like = 0,
                 CreatedAt = DateTime.Now,
                 CarFeatures = new List<CarFeature>(),

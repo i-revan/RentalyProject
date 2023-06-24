@@ -1,0 +1,51 @@
+﻿@using RentalyProject.ViewModels.News;
+
+@model CreateNewsVM
+<div class="container-fluid page-body-wrapper">
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Create News</h4>
+                            <form class="forms-sample" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label asp-for="Title">Title</label>
+                                    <input asp-for="Title" class="form-control" placeholder="Title">
+                                    <span class="text-danger" asp-validation-for="Title"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Content">Content</label>
+                                    <input asp-for="Content" class="form-control" placeholder="Content">
+                                    <span class="text-danger" asp-validation-for="Content"></span>
+                                </div>
+                                <div class="form-group">
+                                    <select asp-for="TagIds" class="form-control" asp-items="new SelectList(ViewBag.Tags,nameof(Tag.Id),nameof(Tag.Name))">
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="TagIds"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Photo">Photo</label>
+                                    <input asp-for="Photo" class="form-control">
+                                    <span class="text-danger" asp-validation-for="Photo"></span>
+                                </div>
+                                <button type="submit" class="btn btn-primary me-2">Create</button>
+                                <a asp-action="index" asp-controller="tag" class="btn btn-light">Cancel</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+</div>
+
+

@@ -629,6 +629,70 @@ namespace RentalyProject.Migrations
                     b.ToTable("Models");
                 });
 
+            modelBuilder.Entity("RentalyProject.Models.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("News");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.NewsTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NewsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewsId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("NewsTags");
+                });
+
             modelBuilder.Entity("RentalyProject.Models.Reservation", b =>
                 {
                     b.Property<int>("Id")
@@ -678,6 +742,37 @@ namespace RentalyProject.Migrations
                     b.ToTable("Reservations");
                 });
 
+            modelBuilder.Entity("RentalyProject.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
+                });
+
             modelBuilder.Entity("RentalyProject.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -703,6 +798,29 @@ namespace RentalyProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -868,7 +986,7 @@ namespace RentalyProject.Migrations
                         .IsRequired();
 
                     b.HasOne("RentalyProject.Models.Car", "Car")
-                        .WithMany()
+                        .WithMany("FavoriteCars")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -887,6 +1005,25 @@ namespace RentalyProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Marka");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.NewsTag", b =>
+                {
+                    b.HasOne("RentalyProject.Models.News", "News")
+                        .WithMany("NewsTags")
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RentalyProject.Models.Tag", "Tag")
+                        .WithMany("NewsTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("News");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.Reservation", b =>
@@ -927,6 +1064,8 @@ namespace RentalyProject.Migrations
                     b.Navigation("CarFeatures");
 
                     b.Navigation("CarImages");
+
+                    b.Navigation("FavoriteCars");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.Category", b =>
@@ -956,6 +1095,16 @@ namespace RentalyProject.Migrations
                     b.Navigation("Cars");
 
                     b.Navigation("Models");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.News", b =>
+                {
+                    b.Navigation("NewsTags");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.Tag", b =>
+                {
+                    b.Navigation("NewsTags");
                 });
 #pragma warning restore 612, 618
         }

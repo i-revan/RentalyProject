@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
 using RentalyProject.Utilities.Exceptions;
+using RentalyProject.ViewModels;
 
 namespace RentalyProject.Controllers
 {
@@ -31,11 +32,9 @@ namespace RentalyProject.Controllers
                 .Include(c=>c.CarColors).ThenInclude(cc=>cc.Color)
                 .FirstOrDefaultAsync(c => c.Id == id);
             if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
-
             //AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             //if (user is null) throw new NotFoundException("User is not found");
             return View(car);
         }
-
     }
 }

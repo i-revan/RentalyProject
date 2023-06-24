@@ -24,6 +24,7 @@ namespace RentalyProject.Controllers
             HomeVM homeVM = new HomeVM()
             {
                 BodyTypes = _context.BodyTypes.AsEnumerable(),
+                Services = _context.Services.AsEnumerable(),
                 Cars = _context.Cars
                 .Include(c => c.Marka)
                 .Include(c => c.CarImages)

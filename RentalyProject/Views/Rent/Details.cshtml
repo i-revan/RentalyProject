@@ -28,7 +28,7 @@
                         <div class="item">
                             <img src="~/assets/images/cars/@Model.CarImages.FirstOrDefault(c=>c.IsMain==true).ImageUrl" alt="">
                         </div>
-                        @foreach (string image in Model.CarImages.Where(c => c.IsMain == false).Select(c=>c.ImageUrl))
+                        @foreach (string image in Model.CarImages.Where(c => c.IsMain == false).Select(c => c.ImageUrl))
                         {
                             <div class="item">
                                 <img src="~/assets/images/cars/@image" alt="">
@@ -100,7 +100,7 @@
 
                     <h4>Features</h4>
                     <ul class="ul-style-2">
-                        @foreach(Feature feature in Model.CarFeatures.Select(f=>f.Feature))
+                        @foreach (Feature feature in Model.CarFeatures.Select(f => f.Feature))
                         {
                             <li>@feature.Name</li>
                         }
@@ -257,13 +257,20 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <input type='submit' id='send_message' value='Book Now' class="btn-main btn-fullwidth">
+                            @if (Model.IsAvailable == true)
+                            {
+                                <button type='submit' id='send_message' class="btn-main btn-fullwidth">Book Now</button>
+                            }
+                            else
+                            {
+                                <btn class="btn btn-danger disabled">This car is not available</btn>
+                            }
 
                             <div class="clearfix"></div>
 
                         </form>
                     </div>
+
 
                     <div class="de-box">
                         <h4>Share</h4>

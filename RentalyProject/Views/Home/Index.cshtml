@@ -272,42 +272,36 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-lg-3">
-                    <div class="box-icon s2 p-small mb20 wow fadeInRight" data-wow-delay=".5s">
-                        <i class="fa bg-color fa-trophy"></i>
-                        <div class="d-inner">
-                            <h4>First class services</h4>
-                            Est dolore ut laboris eu enim eu veniam nostrud esse laborum duis consequat nostrud id
+                    @foreach(Service service in Model.Services.Take(2))
+                    {
+                        <div class="box-icon s2 p-small mb20 wow fadeInRight" data-wow-delay=".5s">
+                            @Html.Raw(service.Icon)
+                            <div class="d-inner">
+                                <h4>@service.Title</h4>
+                                @(service.Description.Length > 50 ? service.Description.Substring(0, 50) + "..." : service.Description)
+                            </div>
                         </div>
-                    </div>
-                    <div class="box-icon s2 p-small mb20 wow fadeInL fadeInRight" data-wow-delay=".75s">
-                        <i class="fa bg-color fa-road"></i>
-                        <div class="d-inner">
-                            <h4>24/7 road assistance</h4>
-                            Est dolore ut laboris eu enim eu veniam nostrud esse laborum duis consequat nostrud id
-                        </div>
-                    </div>
+                    }
                 </div>
-
                 <div class="col-lg-6">
                     <img src="~/assets/images/misc/car.png" alt="" class="img-fluid wow fadeInUp">
                 </div>
-
                 <div class="col-lg-3">
-                    <div class="box-icon s2 d-invert p-small mb20 wow fadeInL fadeInLeft" data-wow-delay="1s">
-                        <i class="fa bg-color fa-tag"></i>
-                        <div class="d-inner">
-                            <h4>Quality at Minimum Expense</h4>
-                            Est dolore ut laboris eu enim eu veniam nostrud esse laborum duis consequat nostrud id
+                @foreach(Service service in Model.Services.Skip(2).Take(2))
+                {
+                        <div class="box-icon s2 d-invert p-small mb20 wow fadeInL fadeInLeft" data-wow-delay="1s">
+                            @Html.Raw(service.Icon)
+                            <div class="d-inner">
+                                <h4>@service.Title</h4>
+                                @((service.Description.Length>50)?service.Description.Substring(0,50)+"...":service.Description)
+                            </div>
                         </div>
-                    </div>
-                    <div class="box-icon s2 d-invert p-small mb20 wow fadeInL fadeInLeft" data-wow-delay="1.25s">
-                        <i class="fa bg-color fa-map-pin"></i>
-                        <div class="d-inner">
-                            <h4>Free Pick-Up & Drop-Off</h4>
-                            Est dolore ut laboris eu enim eu veniam nostrud esse laborum duis consequat nostrud id
-                        </div>
-                    </div>
+                }
                 </div>
+
+
+                
+                    
             </div>
         </div>
     </section>
@@ -442,21 +436,15 @@
                     <h1>Let's Your Adventure Begin</h1>
                     <div class="spacer-20"></div>
                 </div>
-                <div class="col-md-3">
-                    <i class="fa fa-trophy de-icon mb20"></i>
-                    <h4>First Class Services</h4>
-                    <p>Aliquip consequat excepteur non dolor irure ad irure labore ex eiusmod est duis culpa ex ut minim ut ea.</p>
-                </div>
-                <div class="col-md-3">
-                    <i class="fa fa-road de-icon mb20"></i>
-                    <h4>24/7 road assistance</h4>
-                    <p>Aliquip consequat excepteur non dolor irure ad irure labore ex eiusmod est duis culpa ex ut minim ut ea.</p>
-                </div>
-                <div class="col-md-3">
-                    <i class="fa fa-map-pin de-icon mb20"></i>
-                    <h4>Free Pick-Up & Drop-Off</h4>
-                    <p>Aliquip consequat excepteur non dolor irure ad irure labore ex eiusmod est duis culpa ex ut minim ut ea.</p>
-                </div>
+                @foreach (Service service in Model.Services.Take(3))
+                {
+                    <div class="col-md-3">
+                        @Html.Raw(service.Icon)
+                        <h4>@service.Title</h4>
+                        <p>@(service.Description.Length > 50 ? service.Description.Substring(0, 50) + "..." : service.Description)</p>
+                    </div>
+                }
+
             </div>
         </div>
     </section>

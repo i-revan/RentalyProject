@@ -131,13 +131,13 @@ namespace RentalyProject.Controllers
             if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
             if (User.Identity.IsAuthenticated)
             {
-                car.Like += 1;
                 AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
                 if (user is null) throw new NotFoundException("User is not found");
                 
                 bool result = await _context.FavoriteCars.AnyAsync(f=>f.CarId == car.Id && f.AppUserid == user.Id);
                 if (!result)
                 {
+                    car.Like += 1;
                     FavoriteCar favoriteCar = new FavoriteCar()
                     {
                         AppUserid = user.Id,

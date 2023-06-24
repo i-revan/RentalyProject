@@ -1,0 +1,85 @@
+﻿@model News
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">News</h4>
+            <a class="btn btn-dark" asp-controller="news" asp-action="index">Back</a>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Content
+                            </th>
+                            <th>
+                                Tags
+                            </th>
+                            <th>
+                                Created By
+                            </th>
+                            <th>
+                                Create Time
+                            </th>
+                            <th>
+                                Last Update
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Model.Id
+                            </td>
+                            <td>
+                                @Model.Title
+                            </td>
+                            <td>
+                                @Model.Content
+                            </td>
+                            <td>
+                                @if(Model.NewsTags.Count > 0)
+                                {
+                                    @foreach (NewsTag tag in Model.NewsTags)
+                                    {
+                                        <p>@tag.Tag.Name</p>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>There is no tag for this news</p>
+                                }
+                            </td>
+                            <td>
+                                @Model.CreatedBy
+                            </td>
+                            <td>
+                                @Model.CreatedAt.ToString("dd MMMM yyyy hh:mm tt")
+                            </td>
+                            <td>
+                                @if (Model.UpdatedAt is null)
+                                {
+                                    <p>No update yet</p>
+                                }
+                                else
+                                {
+                                    @Model.UpdatedAt.Value.ToString("dd MMMM yyyy hh:mm tt")
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

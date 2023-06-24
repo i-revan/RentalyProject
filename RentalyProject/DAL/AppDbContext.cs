@@ -25,5 +25,9 @@ namespace RentalyProject.DAL
         public DbSet<Model> Models { get; set; }
         public DbSet<FavoriteCar> FavoriteCars { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<NewsTag> NewsTags { get; set; }
     }
 }
