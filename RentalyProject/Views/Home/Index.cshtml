@@ -5,6 +5,7 @@
 @model HomeVM
 @{
     var settings = await service.GetSettingsAsync();
+    int count = 0;
 }
 <div class="no-bottom no-top" id="content">
     <div id="top"></div>
@@ -271,81 +272,12 @@
                     <div class="spacer-20"></div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-lg-3">
-                    @foreach(Service service in Model.Services.Take(2))
-                    {
-                        <div class="box-icon s2 p-small mb20 wow fadeInRight" data-wow-delay=".5s">
-                            @Html.Raw(service.Icon)
-                            <div class="d-inner">
-                                <h4>@service.Title</h4>
-                                @(service.Description.Length > 50 ? service.Description.Substring(0, 50) + "..." : service.Description)
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="col-lg-6">
-                    <img src="~/assets/images/misc/car.png" alt="" class="img-fluid wow fadeInUp">
-                </div>
-                <div class="col-lg-3">
-                @foreach(Service service in Model.Services.Skip(2).Take(2))
-                {
-                        <div class="box-icon s2 d-invert p-small mb20 wow fadeInL fadeInLeft" data-wow-delay="1s">
-                            @Html.Raw(service.Icon)
-                            <div class="d-inner">
-                                <h4>@service.Title</h4>
-                                @((service.Description.Length>50)?service.Description.Substring(0,50)+"...":service.Description)
-                            </div>
-                        </div>
-                }
-                </div>
-
-
-                
-                    
+                @await Component.InvokeAsync("Service")
             </div>
         </div>
     </section>
 
-    <section class="text-light jarallax">
-        <img src="~/assets/images/background/2.jpg" class="jarallax-img" alt="">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInRight">
-                    <h2>We offer customers a wide range of <span class="id-color">commercial cars</span> and <span class="id-color">luxury cars</span> for any occasion.</h2>
-                </div>
-                <div class="col-lg-6 wow fadeInLeft">
-                    Lorem ipsum non aliquip esse do eu ad amet laboris do labore reprehenderit mollit exercitation cillum irure fugiat magna laboris aliquip adipisicing consectetur officia dolor minim ea enim amet in ut non non excepteur anim magna dolor nostrud commodo qui irure deserunt adipisicing nisi ex nostrud sunt officia in aliquip velit anim id aliqua qui do sed non ad qui sed in eu in aliqua sunt pariatur occaecat in ullamco deserunt dolor consectetur laborum non duis occaecat nulla ut sed qui sunt id ex sint sed eu excepteur minim nulla minim excepteur exercitation.
-                </div>
-            </div>
-            <div class="spacer-double"></div>
-            <div class="row text-center">
-                <div class="col-md-3 col-sm-6 mb-sm-30">
-                    <div class="de_count transparent text-light wow fadeInUp">
-                        <h3 class="timer" data-to="15425" data-speed="3000">0</h3>
-                        Hours of Work
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-sm-30">
-                    <div class="de_count transparent text-light wow fadeInUp">
-                        <h3 class="timer" data-to="8745" data-speed="3000">0</h3>
-                        Clients Supported
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-sm-30">
-                    <div class="de_count transparent text-light wow fadeInUp">
-                        <h3 class="timer" data-to="235" data-speed="3000">0</h3>
-                        Awards Winning
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-sm-30">
-                    <div class="de_count transparent text-light wow fadeInUp">
-                        <h3 class="timer" data-to="15" data-speed="3000">0</h3>
-                        Years Experience
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @await Component.InvokeAsync("DynamicSection")
 
     <section id="section-cars">
         <div class="container">
@@ -458,62 +390,29 @@
                     <div class="spacer-20"></div>
                 </div>
 
-                <div class="col-lg-4 mb10">
-                    <div class="bloglist s2 item">
-                        <div class="post-content">
-                            <div class="post-image">
-                                <div class="date-box">
-                                    <div class="m">10</div>
-                                    <div class="d">MAR</div>
+                @foreach(News news in Model.News.OrderByDescending(n=>n.CreatedAt).Take(3))
+                {
+                    <div class="col-lg-4 mb10">
+                        <div class="bloglist s2 item">
+                            <div class="post-content">
+                                <div class="post-image">
+                                    <div class="date-box">
+                                        <div class="m">@news.CreatedAt.Day</div>
+                                        <div class="d">@news.CreatedAt.ToString("MMMM").Substring(0,3).ToUpper()</div>
+                                    </div>
+                                    <img alt="" src="~/assets/images/news/@news.ImageUrl" class="lazy">
                                 </div>
-                                <img alt="" src="~/assets/images/news/pic-blog-1.jpg" class="lazy">
-                            </div>
-                            <div class="post-text">
-                                <h4><a href="news-single.html">Enjoy Best Travel Experience<span></span></a></h4>
-                                <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur.</p>
-                                <a class="btn-main" href="#">Read More</a>
+                                <div class="post-text">
+                                    <h4><a asp-controller="news" asp-action="details" asp-route-id="@news.Id">@news.Title<span></span></a></h4>
+                                    <p>@(news.Content.Length>80?news.Content.Substring(0,80)+"...":news.Content)</p>
+                                    <a class="btn-main" asp-controller="news" asp-action="details" asp-route-id="@news.Id">Read More</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
 
-                <div class="col-lg-4 mb10">
-                    <div class="bloglist s2 item">
-                        <div class="post-content">
-                            <div class="post-image">
-                                <div class="date-box">
-                                    <div class="m">12</div>
-                                    <div class="d">MAR</div>
-                                </div>
-                                <img alt="" src="~/assets/images/news/pic-blog-2.jpg" class="lazy">
-                            </div>
-                            <div class="post-text">
-                                <h4><a href="news-single.html">The Future of Car Rent<span></span></a></h4>
-                                <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur.</p>
-                                <a class="btn-main" href="#">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 mb10">
-                    <div class="bloglist s2 item">
-                        <div class="post-content">
-                            <div class="post-image">
-                                <div class="date-box">
-                                    <div class="m">14</div>
-                                    <div class="d">MAR</div>
-                                </div>
-                                <img alt="" src="~/assets/images/news/pic-blog-3.jpg" class="lazy">
-                            </div>
-                            <div class="post-text">
-                                <h4><a href="news-single.html">Holiday Tips For Backpacker<span></span></a></h4>
-                                <p>Dolore officia sint incididunt non excepteur ea mollit commodo ut enim reprehenderit cupidatat labore ad laborum consectetur.</p>
-                                <a class="btn-main" href="#">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -581,24 +480,17 @@
                 <div class="col-md-6 wow fadeInUp">
                     <div class="accordion secondary">
                         <div class="accordion-section">
-                            <div class="accordion-section-title" data-tab="#accordion-1">
-                                How do I get started with Tips &amp; Trick?
-                            </div>
-                            <div class="accordion-section-content" id="accordion-1">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                            </div>
-                            <div class="accordion-section-title" data-tab="#accordion-2">
-                                What is difference for each plan?
-                            </div>
-                            <div class="accordion-section-content" id="accordion-2">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                            </div>
-                            <div class="accordion-section-title" data-tab="#accordion-3">
-                                What kind of Tips &amp; Trick do I need?
-                            </div>
-                            <div class="accordion-section-content" id="accordion-3">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                            </div>
+                            @foreach(Faq faq in Model.Faqs.Take(3))
+                            {
+                                count++;
+                                <div class="accordion-section-title" data-tab="#accordion-@count">
+                                    @faq.Question
+                                </div>
+                                <div class="accordion-section-content" id="accordion-@count">
+                                    <p>@faq.Answer</p>
+                                </div>
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -606,24 +498,16 @@
                 <div class="col-md-6 wow fadeInUp">
                     <div class="accordion secondary">
                         <div class="accordion-section">
-                            <div class="accordion-section-title" data-tab="#accordion-b-4">
-                                Why do I need domain name?
-                            </div>
-                            <div class="accordion-section-content" id="accordion-b-4">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                            </div>
-                            <div class="accordion-section-title" data-tab="#accordion-b-5">
-                                What my website protected from hackers?
-                            </div>
-                            <div class="accordion-section-content" id="accordion-b-5">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                            </div>
-                            <div class="accordion-section-title" data-tab="#accordion-b-6">
-                                How do I backup my website?
-                            </div>
-                            <div class="accordion-section-content" id="accordion-b-6">
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                            </div>
+                            @foreach(Faq faq in Model.Faqs.Skip(3).Take(3))
+                            {
+                                count++;
+                                <div class="accordion-section-title" data-tab="#accordion-b-@count">
+                                    @faq.Question
+                                </div>
+                                <div class="accordion-section-content" id="accordion-b-@count">
+                                    <p>@faq.Answer</p>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

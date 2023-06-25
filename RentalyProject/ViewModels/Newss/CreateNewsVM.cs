@@ -1,4 +1,4 @@
-﻿namespace RentalyProject.ViewModels.News
+﻿namespace RentalyProject.ViewModels.Newss
 {
     public class CreateNewsVM
     {

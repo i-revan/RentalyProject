@@ -1,0 +1,42 @@
+﻿@using RentalyProject.Models;
+@model IEnumerable<DynamicSection>
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Section</h4>
+            @*<a asp-controller="dynamicsection" asp-action="create" class="btn btn-success">Create Section</a>*@
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Settings
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DynamicSection dynamicSection in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @dynamicSection.Title
+                                </td>
+                                <td>
+                                    <a asp-controller="dynamicsection" asp-action="update" asp-route-id="@dynamicSection.Id" class="btn btn-warning"><i class="mdi mdi-pen"></i></a>
+                                    <a asp-controller="dynamicsection" asp-action="details" asp-route-id="@dynamicSection.Id" class="btn btn-info"><i class="mdi mdi-open-in-new"></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+

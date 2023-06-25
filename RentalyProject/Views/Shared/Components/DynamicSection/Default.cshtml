@@ -1,0 +1,41 @@
+﻿@model DynamicSection
+<section class="text-light jarallax">
+    <img src="~/assets/images/background/@Model.ImageUrl" class="jarallax-img" alt="">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInRight">
+                <h2>@Model.Title</h2>
+            </div>
+            <div class="col-lg-6 wow fadeInLeft">
+                @Model.Description
+            </div>
+        </div>
+        <div class="spacer-double"></div>
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6 mb-sm-30">
+                <div class="de_count transparent text-light wow fadeInUp">
+                    <h3 class="timer" data-to="@Model.HoursOfWorks" data-speed="3000">0</h3>
+                    Hours of Work
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-sm-30">
+                <div class="de_count transparent text-light wow fadeInUp">
+                    <h3 class="timer" data-to="@Model.Clients" data-speed="3000">0</h3>
+                    Clients Supported
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-sm-30">
+                <div class="de_count transparent text-light wow fadeInUp">
+                    <h3 class="timer" data-to="@Model.Awards" data-speed="3000">0</h3>
+                    Awards Winning
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-sm-30">
+                <div class="de_count transparent text-light wow fadeInUp">
+                    <h3 class="timer" data-to="@Model.ExperienceYears" data-speed="3000">0</h3>
+                    Years Experience
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

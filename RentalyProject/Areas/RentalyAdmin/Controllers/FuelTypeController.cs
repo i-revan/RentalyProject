@@ -12,6 +12,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
 {
     [Area("RentalyAdmin")]
     [Authorize(Roles = "Admin")]
+    [AutoValidateAntiforgeryToken]
     public class FuelTypeController : Controller
     {
         private readonly AppDbContext _context;

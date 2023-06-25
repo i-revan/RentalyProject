@@ -32,7 +32,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             ViewBag.CurrentPage = page;
             return View(models);
         }
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             ViewBag.Markas = _context.Markas.AsEnumerable();
             return View();

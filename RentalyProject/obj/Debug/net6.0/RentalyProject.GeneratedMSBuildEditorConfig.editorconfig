@@ -80,6 +80,38 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXENvbG9yXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/DynamicSection/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXER5bmFtaWNTZWN0aW9uXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/DynamicSection/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXER5bmFtaWNTZWN0aW9uXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/DynamicSection/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXER5bmFtaWNTZWN0aW9uXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/DynamicSection/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXER5bmFtaWNTZWN0aW9uXFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Faq/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZhcVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Faq/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZhcVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Faq/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZhcVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Faq/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZhcVxVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Areas/RentalyAdmin/Views/Feature/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXEZlYXR1cmVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -216,6 +248,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUmVudGFseUFkbWluXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/About/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcQ29udGFjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/About/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -240,12 +280,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/News/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/News/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/Rent/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVudFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/Shared/Components/DynamicSection/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRHluYW1pY1NlY3Rpb25cRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/Shared/Components/Service/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcU2VydmljZVxEZWZhdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Revan/Desktop/RentalyProject/RentalyProject/Views/Shared/_Layout.cshtml]

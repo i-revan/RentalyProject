@@ -3,8 +3,10 @@ using RentalyProject.Models;
 using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.Account;
 using RentalyProject.ViewModels.Categories;
+using RentalyProject.ViewModels.DynamicSections;
+using RentalyProject.ViewModels.Faqs;
 using RentalyProject.ViewModels.Models;
-using RentalyProject.ViewModels.News;
+using RentalyProject.ViewModels.Newss;
 using RentalyProject.ViewModels.Services;
 using RentalyProject.ViewModels.Tags;
 
@@ -32,6 +34,11 @@ namespace RentalyProject
 
             CreateMap<News, CreateNewsVM>().ReverseMap();
             CreateMap<News, UpdateNewsVM>().ReverseMap();
+
+            CreateMap<DynamicSection,CreateDynamicSectionVM>().ReverseMap();
+            CreateMap<UpdateDynamicSectionVM,DynamicSection>().ReverseMap();
+
+            CreateMap<Faq, FaqVM>().ReverseMap();
         }
     }
 }

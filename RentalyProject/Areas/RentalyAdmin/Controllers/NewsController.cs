@@ -7,7 +7,7 @@ using RentalyProject.DAL;
 using RentalyProject.Models;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
-using RentalyProject.ViewModels.News;
+using RentalyProject.ViewModels.Newss;
 using System.Data;
 using static NuGet.Packaging.PackagingConstants;
 

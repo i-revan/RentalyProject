@@ -25,6 +25,8 @@ namespace RentalyProject.Controllers
             {
                 BodyTypes = _context.BodyTypes.AsEnumerable(),
                 Services = _context.Services.AsEnumerable(),
+                Faqs = _context.Faqs.AsEnumerable(),
+                News = _context.News.AsEnumerable(),
                 Cars = _context.Cars
                 .Include(c => c.Marka)
                 .Include(c => c.CarImages)
