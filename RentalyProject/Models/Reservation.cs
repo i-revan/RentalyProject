@@ -9,7 +9,7 @@ namespace RentalyProject.Models
         public DateTime PickUpDate { get; set; }
         public DateTime ReturnDate { get; set;}
         public bool? Status { get; set; }
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
         public int CarId { get; set; }
         public Car Car { get; set; }

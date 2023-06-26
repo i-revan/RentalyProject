@@ -1,5 +1,4 @@
-﻿@using RentalyProject.Models;
-@model Car
+﻿@model ReservationVM
 <!-- content begin -->
 <div class="no-bottom no-top zebra" id="content">
     <div id="top"></div>
@@ -26,9 +25,9 @@
                 <div class="col-lg-6">
                     <div id="slider-carousel" class="owl-carousel">
                         <div class="item">
-                            <img src="~/assets/images/cars/@Model.CarImages.FirstOrDefault(c=>c.IsMain==true).ImageUrl" alt="">
+                            <img src="~/assets/images/cars/@Model.Car.CarImages.FirstOrDefault(c=>c.IsMain==true).ImageUrl" alt="">
                         </div>
-                        @foreach (string image in Model.CarImages.Where(c => c.IsMain == false).Select(c => c.ImageUrl))
+                        @foreach (string image in Model.Car.CarImages.Where(c => c.IsMain == false).Select(c => c.ImageUrl))
                         {
                             <div class="item">
                                 <img src="~/assets/images/cars/@image" alt="">
@@ -39,8 +38,8 @@
                 </div>
 
                 <div class="col-lg-3">
-                    <h3>@Model.Marka.Name @Model.Year</h3>
-                    <p>@Model.Description</p>
+                    <h3>@Model.Car.Marka.Name @Model.Car.Year</h3>
+                    <p>@Model.Car.Description</p>
 
                     <div class="spacer-10"></div>
 
@@ -48,51 +47,51 @@
                     <div class="de-spec">
                         <div class="d-row">
                             <span class="d-title">Body</span>
-                            <spam class="d-value">@Model.BodyType.Name</spam>
+                            <spam class="d-value">@Model.Car.BodyType.Name</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Seat</span>
-                            <spam class="d-value">@Model.Seats seats</spam>
+                            <spam class="d-value">@Model.Car.Seats seats</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Door</span>
-                            <spam class="d-value">@Model.Doors doors</spam>
+                            <spam class="d-value">@Model.Car.Doors doors</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Luggage</span>
-                            <spam class="d-value">@Model.Luggage</spam>
+                            <spam class="d-value">@Model.Car.Luggage</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Fuel Type</span>
-                            <spam class="d-value">@Model.FuelType.Name</spam>
+                            <spam class="d-value">@Model.Car.FuelType.Name</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Engine</span>
-                            <spam class="d-value">@Model.EngineCapacity</spam>
+                            <spam class="d-value">@Model.Car.EngineCapacity</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Year</span>
-                            <spam class="d-value">@Model.Year</spam>
+                            <spam class="d-value">@Model.Car.Year</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Mileage</span>
-                            <spam class="d-value">@Model.Milleage</spam>
+                            <spam class="d-value">@Model.Car.Milleage</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Transmission</span>
-                            <spam class="d-value">@Model.Transmission</spam>
+                            <spam class="d-value">@Model.Car.Transmission</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Fuel Economy</span>
-                            <spam class="d-value">@Model.FuelEconomy</spam>
+                            <spam class="d-value">@Model.Car.FuelEconomy</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Exterior Color</span>
-                            <spam class="d-value">@Model.CarColors.FirstOrDefault(cc=>cc.IsInterior==false).Color.Name</spam>
+                            <spam class="d-value">@Model.Car.CarColors.FirstOrDefault(cc=>cc.IsInterior==false).Color.Name</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Interior Color</span>
-                            <spam class="d-value">@Model.CarColors.FirstOrDefault(cc=>cc.IsInterior==true).Color.Name</spam>
+                            <spam class="d-value">@Model.Car.CarColors.FirstOrDefault(cc=>cc.IsInterior==true).Color.Name</spam>
                         </div>
                     </div>
 
@@ -100,7 +99,7 @@
 
                     <h4>Features</h4>
                     <ul class="ul-style-2">
-                        @foreach (Feature feature in Model.CarFeatures.Select(f => f.Feature))
+                        @foreach (Feature feature in Model.Car.CarFeatures.Select(f => f.Feature))
                         {
                             <li>@feature.Name</li>
                         }
@@ -111,11 +110,11 @@
                 <div class="col-lg-3">
                     <div class="de-price text-center">
                         Daily rate
-                        <h3>$@String.Format("{0:#,##0}", Model.RentPrice)</h3>
+                        <h3>$@String.Format("{0:#,##0}", Model.Car.RentPrice)</h3>
                     </div>
                     <div class="spacer-30"></div>
                     <div class="de-box mb25">
-                        <form name="contactForm" id='contact_form' method="post">
+                        <form method="post">
                             <h4>Booking this car</h4>
 
                             <div class="spacer-20"></div>
@@ -123,8 +122,8 @@
                             <div class="row">
                                 <div class="col-lg-12 mb20">
                                     <h5>Pick Up Location</h5>
-                                    <input type="text" name="PickupLocation" onfocus="geolocate()" placeholder="Enter your pickup location" id="autocomplete" autocomplete="off" class="form-control">
-
+                                    <input asp-for="PickUpLocation" onfocus="geolocate()" placeholder="Enter your pickup location" autocomplete="off" class="form-control">
+                                    <span class="text-danger" asp-validation-for="PickUpLocation"></span>
                                     <div class="jls-address-preview jls-address-preview--hidden">
                                         <div class="jls-address-preview__header">
                                         </div>
@@ -133,8 +132,8 @@
 
                                 <div class="col-lg-12 mb20">
                                     <h5>Drop Off Location</h5>
-                                    <input type="text" name="DropoffLocation" onfocus="geolocate()" placeholder="Enter your dropoff location" id="autocomplete2" autocomplete="off" class="form-control">
-
+                                    <input asp-for="DropOffLocation" onfocus="geolocate()" placeholder="Enter your dropoff location" autocomplete="off" class="form-control">
+                                    <span class="text-danger" asp-validation-for="DropOffLocation"></span>
                                     <div class="jls-address-preview jls-address-preview--hidden">
                                         <div class="jls-address-preview__header">
                                         </div>
@@ -144,120 +143,21 @@
                                 <div class="col-lg-12 mb20">
                                     <h5>Pick Up Date & Time</h5>
                                     <div class="date-time-field">
-                                        <input type="text" id="date-picker" name="Pick Up Date" value="">
-                                        <select name="Pick Up Time" id="pickup-time">
-                                            <option selected disabled value="Select time">Time</option>
-                                            <option value="00:00">00:00</option>
-                                            <option value="00:30">00:30</option>
-                                            <option value="01:00">01:00</option>
-                                            <option value="01:30">01:30</option>
-                                            <option value="02:00">02:00</option>
-                                            <option value="02:30">02:30</option>
-                                            <option value="03:00">03:00</option>
-                                            <option value="03:30">03:30</option>
-                                            <option value="04:00">04:00</option>
-                                            <option value="04:30">04:30</option>
-                                            <option value="05:00">05:00</option>
-                                            <option value="05:30">05:30</option>
-                                            <option value="06:00">06:00</option>
-                                            <option value="06:30">06:30</option>
-                                            <option value="07:00">07:00</option>
-                                            <option value="07:30">07:30</option>
-                                            <option value="08:00">08:00</option>
-                                            <option value="08:30">08:30</option>
-                                            <option value="09:00">09:00</option>
-                                            <option value="09:30">09:30</option>
-                                            <option value="10:00">10:00</option>
-                                            <option value="10:30">10:30</option>
-                                            <option value="11:00">11:00</option>
-                                            <option value="11:30">11:30</option>
-                                            <option value="12:00">12:00</option>
-                                            <option value="12:30">12:30</option>
-                                            <option value="13:00">13:00</option>
-                                            <option value="13:30">13:30</option>
-                                            <option value="14:00">14:00</option>
-                                            <option value="14:30">14:30</option>
-                                            <option value="15:00">15:00</option>
-                                            <option value="15:30">15:30</option>
-                                            <option value="16:00">16:00</option>
-                                            <option value="16:30">16:30</option>
-                                            <option value="17:00">17:00</option>
-                                            <option value="17:30">17:30</option>
-                                            <option value="18:00">18:00</option>
-                                            <option value="18:30">18:30</option>
-                                            <option value="19:00">19:00</option>
-                                            <option value="19:30">19:30</option>
-                                            <option value="20:00">20:00</option>
-                                            <option value="20:30">20:30</option>
-                                            <option value="21:00">21:00</option>
-                                            <option value="21:30">21:30</option>
-                                            <option value="22:00">22:00</option>
-                                            <option value="22:30">22:30</option>
-                                            <option value="23:00">23:00</option>
-                                            <option value="23:30">23:30</option>
-                                        </select>
+                                        <input asp-for="PickUpDate">
+                                        <span class="text-danger" asp-validation-for="PickUpDate"></span>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 mb20">
                                     <h5>Return Date & Time</h5>
                                     <div class="date-time-field">
-                                        <input type="text" id="date-picker-2" name="Collection Date" value="">
-                                        <select name="Collection Time" id="collection-time">
-                                            <option selected disabled value="Select time">Time</option>
-                                            <option value="00:00">00:00</option>
-                                            <option value="00:30">00:30</option>
-                                            <option value="01:00">01:00</option>
-                                            <option value="01:30">01:30</option>
-                                            <option value="02:00">02:00</option>
-                                            <option value="02:30">02:30</option>
-                                            <option value="03:00">03:00</option>
-                                            <option value="03:30">03:30</option>
-                                            <option value="04:00">04:00</option>
-                                            <option value="04:30">04:30</option>
-                                            <option value="05:00">05:00</option>
-                                            <option value="05:30">05:30</option>
-                                            <option value="06:00">06:00</option>
-                                            <option value="06:30">06:30</option>
-                                            <option value="07:00">07:00</option>
-                                            <option value="07:30">07:30</option>
-                                            <option value="08:00">08:00</option>
-                                            <option value="08:30">08:30</option>
-                                            <option value="09:00">09:00</option>
-                                            <option value="09:30">09:30</option>
-                                            <option value="10:00">10:00</option>
-                                            <option value="10:30">10:30</option>
-                                            <option value="11:00">11:00</option>
-                                            <option value="11:30">11:30</option>
-                                            <option value="12:00">12:00</option>
-                                            <option value="12:30">12:30</option>
-                                            <option value="13:00">13:00</option>
-                                            <option value="13:30">13:30</option>
-                                            <option value="14:00">14:00</option>
-                                            <option value="14:30">14:30</option>
-                                            <option value="15:00">15:00</option>
-                                            <option value="15:30">15:30</option>
-                                            <option value="16:00">16:00</option>
-                                            <option value="16:30">16:30</option>
-                                            <option value="17:00">17:00</option>
-                                            <option value="17:30">17:30</option>
-                                            <option value="18:00">18:00</option>
-                                            <option value="18:30">18:30</option>
-                                            <option value="19:00">19:00</option>
-                                            <option value="19:30">19:30</option>
-                                            <option value="20:00">20:00</option>
-                                            <option value="20:30">20:30</option>
-                                            <option value="21:00">21:00</option>
-                                            <option value="21:30">21:30</option>
-                                            <option value="22:00">22:00</option>
-                                            <option value="22:30">22:30</option>
-                                            <option value="23:00">23:00</option>
-                                            <option value="23:30">23:30</option>
-                                        </select>
+                                        <input asp-for="ReturnDate"/>
+                                        <span class="text-danger" asp-validation-for="ReturnDate"></span>
                                     </div>
                                 </div>
+                                
                             </div>
-                            @if (Model.IsAvailable == true)
+                            @if (Model.Car.IsAvailable == true)
                             {
                                 <button type='submit' id='send_message' class="btn-main btn-fullwidth">Book Now</button>
                             }

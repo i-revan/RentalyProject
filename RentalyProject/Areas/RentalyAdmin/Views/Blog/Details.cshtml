@@ -1,0 +1,74 @@
+﻿@model Blog
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Body Type</h4>
+            <a class="btn btn-dark" asp-controller="blog" asp-action="index">Back</a>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Blog
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Create Time
+                            </th>
+                            <th>
+                                Last Update
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Model.Id
+                            </td>
+                            <td>
+                                <img style="object-fit:cover;" src="~/assets/images/testimonial/@Model.ImageUrl" />
+                            </td>
+                            <td>
+                                @Model.Name @Model.Surname
+                            </td>
+                            <td>
+                                @Model.Title
+                            </td>
+                            <td>
+                                @Model.Description
+                            </td>
+                            <td>
+                                @Model.CreatedAt.ToString("dd MMMM yyyy hh:mm tt")
+                            </td>
+                            <td>
+                                @if (Model.UpdatedAt is null)
+                                {
+                                    <p>No update yet</p>
+                                }
+                                else
+                                {
+                                    @Model.UpdatedAt.Value.ToString("dd MMMM yyyy hh:mm tt")
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

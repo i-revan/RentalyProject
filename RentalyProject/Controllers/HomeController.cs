@@ -51,5 +51,11 @@ namespace RentalyProject.Controllers
                 .AsEnumerable();
             return View(Cars);
         }
+        public async Task<IActionResult> Orders()
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            List<Reservation> reservations = user.Reservations.ToList();
+            return View(reservations);
+        }
     }
 }

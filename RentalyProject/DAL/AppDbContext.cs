@@ -31,5 +31,7 @@ namespace RentalyProject.DAL
         public DbSet<NewsTag> NewsTags { get; set; }
         public DbSet<DynamicSection> DynamicSections { get; set; }
         public DbSet<Faq> Faqs { get; set; }
+        public DbSet<UserQuestion> UserQuestions { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
     }
 }
