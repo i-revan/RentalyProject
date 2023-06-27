@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
+using RentalyProject.Interfaces;
 using RentalyProject.Models;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.ViewModels;
@@ -15,11 +16,13 @@ namespace RentalyProject.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IEmailService _emailService;
 
-        public RentController(AppDbContext context, UserManager<AppUser> userManager)
+        public RentController(AppDbContext context, UserManager<AppUser> userManager, IEmailService emailService)
         {
             _context = context;
             _userManager = userManager;
+            _emailService = emailService;
         }
         public async Task<IActionResult> Details(int? id)
         {
@@ -73,6 +76,28 @@ namespace RentalyProject.Controllers
             };
             await _context.Reservations.AddAsync(reservation);
             await _context.SaveChangesAsync();
+
+            string body = @"<table>
+                                <thead>
+                                    <tr>
+                                        <th>Car</th>
+                                        <th>Payment</th>
+                                        <th>Reservation Date</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+            
+                                    ";
+            body += @$"
+                    <td>{reservation.Car.Marka.Name}</td>
+                    <td>${String.Format("{0:#,##0}", (reservation.ReturnDate - reservation.PickUpDate).Days * reservation.Car.RentPrice)}</td>
+                    <td>{reservation.CreatedAt.ToString("dd MMMM, yyyy")}</td>
+                </tr>
+            </tbody>
+                            </table>";
+            await _emailService.SendMail(user.Email, "Reservation Replacement",body,true);
             return RedirectToAction("Orders", "Home");
         }
     }

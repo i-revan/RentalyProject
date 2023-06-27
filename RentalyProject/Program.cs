@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
+using RentalyProject.Interfaces;
 using RentalyProject.Middlewares;
 using RentalyProject.Models;
 using RentalyProject.Services;
@@ -35,8 +36,11 @@ namespace RentalyProject
                 opt.Lockout.AllowedForNewUsers = true;
                 opt.Lockout.MaxFailedAccessAttempts = 3;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
+
+                opt.SignIn.RequireConfirmedEmail = true;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             builder.Services.AddScoped<LayoutService>();
+            builder.Services.AddScoped<IEmailService,EmailService>();
             builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
             var app = builder.Build();
             app.UseAuthentication();

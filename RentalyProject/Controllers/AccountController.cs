@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RentalyProject.Interfaces;
 using RentalyProject.Models;
 using RentalyProject.Utilities.Enums;
+using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.Account;
 
@@ -15,13 +17,15 @@ namespace RentalyProject.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IEmailService _emailService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, RoleManager<IdentityRole> roleManager,IEmailService emailService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _mapper = mapper;
             _roleManager = roleManager;
+            _emailService = emailService;
         }
         public IActionResult Register()
         {
@@ -44,10 +48,29 @@ namespace RentalyProject.Controllers
                 return View();
             }
             await _userManager.AddToRoleAsync(user,UserRole.Member.ToString());
-            await _signInManager.SignInAsync(user, false);
-            if (returnUrl != null) return Redirect(returnUrl);
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, Email = user.Email }, Request.Scheme);
+            await _emailService.SendMail(user.Email,"Email Confirmation",confirmationLink);
+            //await _signInManager.SignInAsync(user, false);
+            //if (returnUrl != null) return Redirect(returnUrl);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(SuccessfulRegister), "Account");
+        }
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        {
+            AppUser user = await _userManager.FindByEmailAsync(email);
+            if (user == null) throw new NotFoundException("User is not found!");
+            IdentityResult result = await _userManager.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+            {
+                throw new TokenException("Token is invalid");
+            }
+            await _signInManager.SignInAsync(user,false);
+            return View();
+        }
+        public IActionResult SuccessfulRegister()
+        {
+            return View();
         }
         public IActionResult Login()
         {
@@ -71,6 +94,11 @@ namespace RentalyProject.Controllers
             if (result.IsLockedOut)
             {
                 ModelState.AddModelError(String.Empty, "Login is not enable now,please try again later");
+                return View();
+            }
+            if (!existed.EmailConfirmed)
+            {
+                ModelState.AddModelError(String.Empty, "Please confirm your email");
                 return View();
             }
             if (!result.Succeeded)
