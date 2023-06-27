@@ -1,4 +1,5 @@
 ﻿using AutoMapper.Configuration.Conventions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace RentalyProject.Controllers
             {
                 BodyTypes = _context.BodyTypes.AsEnumerable(),
                 Services = _context.Services.AsEnumerable(),
+                Blogs = _context.Blogs.AsEnumerable(),
                 Faqs = _context.Faqs.AsEnumerable(),
                 News = _context.News.AsEnumerable(),
                 Cars = _context.Cars
@@ -51,10 +53,13 @@ namespace RentalyProject.Controllers
                 .AsEnumerable();
             return View(Cars);
         }
+        [Authorize]
         public async Task<IActionResult> Orders()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-            List<Reservation> reservations = user.Reservations.ToList();
+            List<Reservation> reservations = await _context.Reservations.Where(r => r.AppUser == user)
+                .Include(r=>r.Car)
+                .ThenInclude(c=>c.Marka).ToListAsync();
             return View(reservations);
         }
     }

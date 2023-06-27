@@ -63,14 +63,14 @@ namespace RentalyProject.Controllers
             Reservation reservation = new Reservation()
             {
                 PickUpLocation = reservationVM.PickUpLocation,
-                DropOffLocation = reservationVM.PickUpLocation,
+                DropOffLocation = reservationVM.DropOffLocation,
                 PickUpDate = reservationVM.PickUpDate,
-                ReturnDate = reservationVM.PickUpDate,
-                AppUser = user,
+                ReturnDate = reservationVM.ReturnDate,
+                AppUserId = user.Id,
                 Status = null,
-                Car = car
+                CarId = car.Id,
+                CreatedAt = DateTime.Now
             };
-            user.Reservations.Add(reservation);
             await _context.Reservations.AddAsync(reservation);
             await _context.SaveChangesAsync();
             return RedirectToAction("Orders", "Home");

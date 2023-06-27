@@ -46,10 +46,10 @@ namespace RentalyProject
 
             CreateMap<Blog, CreateBlogVM>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
-               .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Name.Capitalize()))
+               .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()))
            .ReverseMap()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
-               .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Name.Capitalize()));
+               .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()));
             CreateMap<Blog, UpdateBlogVM>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()))

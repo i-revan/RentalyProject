@@ -98,6 +98,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Blog blog = await _context.Blogs.Where(b => b.Id == id).FirstOrDefaultAsync();
             if (blog is null) throw new NotFoundException("There is no blog has this id or it was deleted");
+            blog.ImageUrl.DeleteFile(_env.WebRootPath, _folder);
             _context.Blogs.Remove(blog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

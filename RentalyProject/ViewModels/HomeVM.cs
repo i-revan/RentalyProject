@@ -9,6 +9,7 @@ namespace RentalyProject.ViewModels
         public IEnumerable<Service> Services { get; set; }
         public IEnumerable<Faq> Faqs { get; set; }
         public IEnumerable<News> News { get; set; }
+        public IEnumerable<Blog> Blogs { get; set; }
         public IEnumerable<FavoriteCar>? UserFavorites { get; set; }
     }
 }
