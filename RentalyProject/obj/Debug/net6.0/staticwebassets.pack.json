@@ -3845,6 +3845,14 @@
       "PackagePath": "staticwebassets\\assets\\images\\cars\\5a632d2b-9950-4ca8-928e-54e3cb18658e4.jpg"
     },
     {
+      "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\5bd307fc-101e-440e-a386-6474c2467342chevrolet-camaro.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\cars\\5bd307fc-101e-440e-a386-6474c2467342chevrolet-camaro.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\5dd0360a-17b2-49d8-9fc2-edc3d6d53a16bmw-m5.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\cars\\5dd0360a-17b2-49d8-9fc2-edc3d6d53a16bmw-m5.jpg"
+    },
+    {
       "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\67815e27-6f53-4db0-a1f7-2b0fea513315hyundai-staria.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\cars\\67815e27-6f53-4db0-a1f7-2b0fea513315hyundai-staria.jpg"
     },
@@ -3859,6 +3867,10 @@
     {
       "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\7aa89e2d-83a0-4e8c-8bea-7825d121283ebentley.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\cars\\7aa89e2d-83a0-4e8c-8bea-7825d121283ebentley.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\94fab953-55b3-4cd8-92a2-120747deb7ffjeep-renegade.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\cars\\94fab953-55b3-4cd8-92a2-120747deb7ffjeep-renegade.jpg"
     },
     {
       "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\96572a72-8a6e-45e7-ac25-497f62773f99bentley.jpg",
@@ -3889,8 +3901,20 @@
       "PackagePath": "staticwebassets\\assets\\images\\cars\\chevrolet-camaro.jpg"
     },
     {
+      "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\d8ac8d5f-40e0-408d-bc62-68c1aa0cd333lexus.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\cars\\d8ac8d5f-40e0-408d-bc62-68c1aa0cd333lexus.jpg"
+    },
+    {
       "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\df9cd5c9-8faf-4d72-b992-26a37108a97chyundai-staria.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\cars\\df9cd5c9-8faf-4d72-b992-26a37108a97chyundai-staria.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\f0263dc4-582c-4d86-892f-13218b4b9a65range-rover.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\cars\\f0263dc4-582c-4d86-892f-13218b4b9a65range-rover.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\f4f8336c-2dcd-4151-8ee4-ba63490ccf20chevrolet-camaro.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\cars\\f4f8336c-2dcd-4151-8ee4-ba63490ccf20chevrolet-camaro.jpg"
     },
     {
       "Id": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\fe848bac-2781-4bd0-b473-0b082a7adfc9hyundai-staria.jpg",

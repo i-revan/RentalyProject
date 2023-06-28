@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Car>
+﻿@model CarsVM
 <!-- content begin -->
 <div class="no-bottom no-top zebra" id="content">
     <div id="top"></div>
@@ -26,25 +26,17 @@
                     <div class="item_filter_group">
                         <h4>Vehicle Type</h4>
                         <div class="de_form">
-                            <div class="de_checkbox">
-                                <input id="vehicle_type_1" name="vehicle_type_1" type="checkbox" value="vehicle_type_1">
-                                <label for="vehicle_type_1">Car</label>
-                            </div>
+                            @foreach (Category category in Model.Categories)
+                            {
+                                <div class="de_checkbox">
+                                    <a asp-controller="home" asp-action="cars" asp-route-categoryName="@category.Name">
 
-                            <div class="de_checkbox">
-                                <input id="vehicle_type_2" name="vehicle_type_2" type="checkbox" value="vehicle_type_2">
-                                <label for="vehicle_type_2">Van</label>
-                            </div>
+                                        @category.Name
+                                    </a>
+                                </div>
+                            }
 
-                            <div class="de_checkbox">
-                                <input id="vehicle_type_3" name="vehicle_type_3" type="checkbox" value="vehicle_type_3">
-                                <label for="vehicle_type_3">Minibus</label>
-                            </div>
 
-                            <div class="de_checkbox">
-                                <input id="vehicle_type_4" name="vehicle_type_4" type="checkbox" value="vehicle_type_4">
-                                <label for="vehicle_type_4">Prestige</label>
-                            </div>
 
                         </div>
                     </div>
@@ -52,56 +44,15 @@
                     <div class="item_filter_group">
                         <h4>Car Body Type</h4>
                         <div class="de_form">
-                            <div class="de_checkbox">
-                                <input id="car_body_type_1" name="car_body_type_1" type="checkbox" value="car_body_type_1">
-                                <label for="car_body_type_1">Convertible</label>
-                            </div>
+                            @foreach (BodyType bodyType in Model.BodyTypes)
+                            {
+                                <div class="de_checkbox">
+                                    <a asp-controller="home" asp-action="cars" asp-route-bodyTypeName="@bodyType.Name">
 
-                            <div class="de_checkbox">
-                                <input id="car_body_type_2" name="car_body_type_2" type="checkbox" value="car_body_type_2">
-                                <label for="car_body_type_2">Coupe</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_3" name="car_body_type_3" type="checkbox" value="car_body_type_3">
-                                <label for="car_body_type_3">Exotic Cars</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_4" name="car_body_type_4" type="checkbox" value="car_body_type_4">
-                                <label for="car_body_type_4">Hatchback</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_5" name="car_body_type_5" type="checkbox" value="car_body_type_5">
-                                <label for="car_body_type_5">Minivan</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_6" name="car_body_type_6" type="checkbox" value="car_body_type_6">
-                                <label for="car_body_type_6">Pickup Truck</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_7" name="car_body_type_7" type="checkbox" value="car_body_type_7">
-                                <label for="car_body_type_7">Sedan</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_8" name="car_body_type_8" type="checkbox" value="car_body_type_8">
-                                <label for="car_body_type_8">Sports Car</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_9" name="car_body_type_9" type="checkbox" value="car_body_type_9">
-                                <label for="car_body_type_9">Station Wagon</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_10" name="car_body_type_10" type="checkbox" value="car_body_type_10">
-                                <label for="car_body_type_10">SUV</label>
-                            </div>
-
+                                        @bodyType.Name
+                                    </a>
+                                </div>
+                            }
                         </div>
                     </div>
 
@@ -109,18 +60,21 @@
                         <h4>Car Seats</h4>
                         <div class="de_form">
                             <div class="de_checkbox">
-                                <input id="car_seat_1" name="car_seat_1" type="checkbox" value="car_seat_1">
-                                <label for="car_seat_1">2 seats</label>
+                                <a asp-controller="home" asp-action="cars" asp-route-seats="2">
+                                    2 seats
+                                </a>
                             </div>
 
                             <div class="de_checkbox">
-                                <input id="car_seat_2" name="car_seat_2" type="checkbox" value="car_seat_2">
-                                <label for="car_seat_2">4 seats</label>
+                                <a asp-controller="home" asp-action="cars" asp-route-seats="4">
+                                    4 seats
+                                </a>
                             </div>
 
                             <div class="de_checkbox">
-                                <input id="car_seat_3" name="car_seat_3" type="checkbox" value="car_seat_3">
-                                <label for="car_seat_3">6 seats</label>
+                                <a asp-controller="home" asp-action="cars" asp-route-seats="">
+                                    6 seats
+                                </a>
                             </div>
 
                             <div class="de_checkbox">
@@ -182,7 +136,7 @@
                 <div class="col-lg-9">
                     <div class="row">
 
-                        @foreach(Car car in Model)
+                        @foreach (Car car in Model.Cars)
                         {
                             <div class="col-xl-4 col-lg-6">
                                 <div class="de-item mb30">
@@ -211,7 +165,7 @@
                             </div>
                         }
 
-                        
+
 
 
 

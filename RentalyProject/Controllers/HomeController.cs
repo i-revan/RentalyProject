@@ -44,14 +44,38 @@ namespace RentalyProject.Controllers
             
             return View(homeVM);
         }
-        public IActionResult Cars()
+        public IActionResult Cars(string? categoryName,string? bodyTypeName,int? seats,int? engineCapacity)
         {
+            IQueryable<Car> query = _context.Cars
+                .Include(c => c.Marka)
+                .Include(c => c.CarImages)
+                .Include(c => c.BodyType).AsQueryable();
+
+            if(!String.IsNullOrEmpty(categoryName))
+            {
+                query = query.Where(c=>c.Category.Name.Trim().ToLower() == categoryName.Trim().ToLower());
+            }
+            if (!String.IsNullOrEmpty(bodyTypeName))
+            {
+                query = query.Where(c => c.BodyType.Name.Trim().ToLower() == bodyTypeName.Trim().ToLower());
+            }
+            if (seats != null)
+            {
+                query = query.Where(c => c.Seats == seats);
+            }
+
             IEnumerable<Car> Cars = _context.Cars
                 .Include(c => c.Marka)
                 .Include(c => c.CarImages)
                 .Include(c => c.BodyType)
                 .AsEnumerable();
-            return View(Cars);
+            CarsVM carsVM = new CarsVM
+            {
+                Cars = query.AsEnumerable(),
+                Categories = _context.Categories.AsEnumerable(),
+                BodyTypes = _context.BodyTypes.AsEnumerable()
+            };
+            return View(carsVM);
         }
         [Authorize]
         public async Task<IActionResult> Orders()
