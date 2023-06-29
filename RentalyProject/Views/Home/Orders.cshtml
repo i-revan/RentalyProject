@@ -30,15 +30,16 @@
                             </div>
                             <div class="profile_name">
                                 <h4>
-                                    Monica Lucas
-                                    <span class="profile_username text-gray">monica@rentaly.com</span>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        @User.Identity.Name
+                                    }
                                 </h4>
                             </div>
                         </div>
                         <div class="spacer-20"></div>
                         <ul class="menu-col">
-                            <li><a href="account-dashboard.html"><i class="fa fa-home"></i>Dashboard</a></li>
-                            <li><a href="account-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
+                            <li><a ><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="" class="active"><i class="fa fa-calendar"></i>My Orders</a></li>
                             <li><a asp-controller="favorite" asp-action="index"><i class="fa fa-car"></i>My Favorite Cars</a></li>
                             <li><a asp-controller="account" asp-action="logout"><i class="fa fa-sign-out"></i>Sign Out</a></li>

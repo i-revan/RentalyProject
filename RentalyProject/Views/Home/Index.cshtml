@@ -310,28 +310,28 @@
                                                     {
                                                         result = true;
                                                         <div class="d-item_like">
-                                                            <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id"><i class="fa fa-heart active"></i></a><span>@car.Like</span>
+                                                            <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id" class="add-favorite"><i class="fa fa-heart active"></i></a><span>@car.Like</span>
                                                         </div>
                                                     }
                                                 }
                                                 if (!result)
                                                 {
                                                     <div class="d-item_like">
-                                                        <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id"><i class="fa fa-heart"></i></a><span>@car.Like</span>
+                                                        <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id" class="add-favorite"><i class="fa fa-heart"></i></a><span>@car.Like</span>
                                                     </div>
                                                 }
                                             }
                                             else
                                             {
                                                 <div class="d-item_like">
-                                                    <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id"><i class="fa fa-heart"></i></a><span>@car.Like</span>
+                                                    <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id" class="add-favorite"><i class="fa fa-heart"></i></a><span>@car.Like</span>
                                                 </div>
                                             }
                                         }
                                         else
                                         {
                                             <div class="d-item_like">
-                                                <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id"><i class="fa fa-heart"></i></a><span>@car.Like</span>
+                                                <a asp-controller="favorite" asp-action="AddFavorite" asp-route-id="@car.Id" class="add-favorite"><i class="fa fa-heart"></i></a><span>@car.Like</span>
                                             </div>
                                         }
 
@@ -516,3 +516,19 @@
 </div>
 <!-- content close -->
 <a href="#" id="back-to-top"></a>
+
+
+
+
+<script>
+    let btns = document.querySelectorAll(".add-favorite")
+    btns.forEach(b=>{
+        b.addEventListener("click",function(e){
+            e.preventDefault()
+            $.ajax({
+                type: "GET",
+                url:this.href
+            }).done(data=>console.log(data))
+        })
+    })
+</script>
