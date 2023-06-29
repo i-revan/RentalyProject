@@ -581,6 +581,58 @@ namespace RentalyProject.Migrations
                     b.ToTable("DynamicSections");
                 });
 
+            modelBuilder.Entity("RentalyProject.Models.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FacebookLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LinkedinLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PinterestLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TwitterLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("Employees");
+                });
+
             modelBuilder.Entity("RentalyProject.Models.Faq", b =>
                 {
                     b.Property<int>("Id")
@@ -800,6 +852,29 @@ namespace RentalyProject.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("NewsTags");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Positions");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.Reservation", b =>
@@ -1119,6 +1194,17 @@ namespace RentalyProject.Migrations
                     b.Navigation("Car");
                 });
 
+            modelBuilder.Entity("RentalyProject.Models.Employee", b =>
+                {
+                    b.HasOne("RentalyProject.Models.Position", "Position")
+                        .WithMany("Employees")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Position");
+                });
+
             modelBuilder.Entity("RentalyProject.Models.FavoriteCar", b =>
                 {
                     b.HasOne("RentalyProject.Models.AppUser", "AppUser")
@@ -1244,6 +1330,11 @@ namespace RentalyProject.Migrations
             modelBuilder.Entity("RentalyProject.Models.News", b =>
                 {
                     b.Navigation("NewsTags");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.Position", b =>
+                {
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.Tag", b =>

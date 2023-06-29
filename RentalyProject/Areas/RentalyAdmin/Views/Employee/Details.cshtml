@@ -1,0 +1,86 @@
+﻿@model Employee
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Employee</h4>
+            <a class="btn btn-dark" asp-controller="employee" asp-action="index">Back</a>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Employee
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Facebook
+                            </th>
+                            <th>
+                                Twitter
+                            </th>
+                            <th>
+                                Linkedin
+                            </th>
+                            <th>
+                                Pinterest
+                            </th>
+                            <th>
+                                Create Time
+                            </th>
+                            <th>
+                                Last Update
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Model.Id
+                            </td>
+                            <td>
+                                <img style="object-fit:cover;" src="~/assets/images/team/@Model.ImageUrl" />
+                            </td>
+                            <td>
+                                @Model.Name @Model.Surname
+                            </td>
+                            <td>
+                                @Model.FacebookLink
+                            </td>
+                            <td>
+                                @Model.TwitterLink
+                            </td>
+                            <td>
+                                @Model.LinkedinLink
+                            </td>
+                            <td>
+                                @Model.PinterestLink
+                            </td>
+                            <td>
+                                @Model.CreatedAt.ToString("dd MMMM yyyy hh:mm tt")
+                            </td>
+                            <td>
+                                @if (Model.UpdatedAt is null)
+                                {
+                                    <p>No update yet</p>
+                                }
+                                else
+                                {
+                                    @Model.UpdatedAt.Value.ToString("dd MMMM yyyy hh:mm tt")
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

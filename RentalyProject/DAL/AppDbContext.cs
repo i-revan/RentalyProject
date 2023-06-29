@@ -33,5 +33,7 @@ namespace RentalyProject.DAL
         public DbSet<Faq> Faqs { get; set; }
         public DbSet<UserQuestion> UserQuestions { get; set; }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using RentalyProject.ViewModels.Account;
 using RentalyProject.ViewModels.Blogs;
 using RentalyProject.ViewModels.Categories;
 using RentalyProject.ViewModels.DynamicSections;
+using RentalyProject.ViewModels.Employees;
 using RentalyProject.ViewModels.Faqs;
 using RentalyProject.ViewModels.Models;
 using RentalyProject.ViewModels.Newss;
@@ -53,6 +54,19 @@ namespace RentalyProject
             CreateMap<Blog, UpdateBlogVM>()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()))
+           .ReverseMap()
+               .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
+               .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()));
+
+            CreateMap<Employee, CreateEmployeeVM>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
+                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()))
+           .ReverseMap()
+               .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
+               .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()));
+            CreateMap<Employee,UpdateEmployeeVM>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
+                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()))
            .ReverseMap()
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()));

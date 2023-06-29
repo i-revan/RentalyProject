@@ -1,4 +1,5 @@
-﻿<!-- content begin -->
+﻿@model IEnumerable<Employee>
+<!-- content begin -->
 <div class="no-bottom no-top zebra" id="content">
     <div id="top"></div>
 
@@ -29,93 +30,32 @@
                     <div class="spacer-20"></div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-6 mb30">
-                    <div class="f-profile text-center">
-                        <div class="fp-wrap f-invert">
-                            <div class="fpw-overlay">
-                                <div class="fpwo-wrap">
-                                    <div class="fpwow-icons">
-                                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
+                @foreach(Employee employee in Model)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-6 mb30">
+                        <div class="f-profile text-center">
+                            <div class="fp-wrap f-invert">
+                                <div class="fpw-overlay">
+                                    <div class="fpwo-wrap">
+                                        <div class="fpwow-icons">
+                                            <a href="@employee.FacebookLink"><i class="fa fa-facebook fa-lg"></i></a>
+                                            <a href="@employee.TwitterLink"><i class="fa fa-twitter fa-lg"></i></a>
+                                            <a href="@employee.LinkedinLink"><i class="fa fa-linkedin fa-lg"></i></a>
+                                            <a href="@employee.PinterestLink"><i class="fa fa-pinterest fa-lg"></i></a>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="fpw-overlay-btm"></div>
+                                <img src="~/assets/images/team/@employee.ImageUrl" class="fp-image img-fluid" alt="">
                             </div>
-                            <div class="fpw-overlay-btm"></div>
-                            <img src="~/assets/images/team/1.jpg" class="fp-image img-fluid" alt="">
+
+                            <h4>@employee.Name @employee.Surname</h4>
+                            @employee.Position.Name
                         </div>
-
-                        <h4>Fynley Wilkinson</h4>
-                        Chief Creative Officer
                     </div>
-                </div>
+                }
 
-                <div class="col-lg-3 col-md-6 col-sm-6 mb30">
-                    <div class="f-profile text-center">
-                        <div class="fp-wrap f-invert">
-                            <div class="fpw-overlay">
-                                <div class="fpwo-wrap">
-                                    <div class="fpwow-icons">
-                                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="fpw-overlay-btm"></div>
-                            <img src="~/assets/images/team/2.jpg" class="fp-image img-fluid" alt="">
-                        </div>
-
-                        <h4>Peter Welsh</h4>
-                        Chief Technology Officer
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-6 mb30">
-                    <div class="f-profile text-center">
-                        <div class="fp-wrap f-invert">
-                            <div class="fpw-overlay">
-                                <div class="fpwo-wrap">
-                                    <div class="fpwow-icons">
-                                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="fpw-overlay-btm"></div>
-                            <img src="~/assets/images/team/3.jpg" class="fp-image img-fluid" alt="">
-                        </div>
-
-                        <h4>John Shepard</h4>
-                        Chief Executive Officer
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-6 mb30">
-                    <div class="f-profile text-center">
-                        <div class="fp-wrap f-invert">
-                            <div class="fpw-overlay">
-                                <div class="fpwo-wrap">
-                                    <div class="fpwow-icons">
-                                        <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="fpw-overlay-btm"></div>
-                            <img src="~/assets/images/team/4.jpg" class="fp-image img-fluid" alt="">
-                        </div>
-
-                        <h4>Robyn Peel</h4>
-                        Director of Finance
-                    </div>
-                </div>
+               
 
             </div>
         </div>

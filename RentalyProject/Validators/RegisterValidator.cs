@@ -11,7 +11,7 @@ namespace RentalyProject.Validators
             RuleFor(r => r.Name)
                 .NotEmpty().WithMessage("Please enter your name")
                 .NotNull().WithMessage("Please enter your name")
-                .MinimumLength(3).WithMessage("Name cannot be shorter than 3")
+                .MinimumLength(3).WithMessage("Name length cannot be shorter than 3")
                 .Must(name=> name.CheckIdentity()).WithMessage("Enter your name correctly");
             RuleFor(r => r.Surname)
                 .NotNull().WithMessage("Please enter your surname")

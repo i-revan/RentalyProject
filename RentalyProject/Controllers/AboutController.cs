@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
 using RentalyProject.ViewModels.UserQuestions;
@@ -18,7 +19,8 @@ namespace RentalyProject.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Employee> employees = _context.Employees.Include(e=>e.Position).AsEnumerable();
+            return View(employees);
         }
         public IActionResult Contact()
         {
