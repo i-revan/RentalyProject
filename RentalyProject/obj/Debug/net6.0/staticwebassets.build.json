@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BW0c8PscSDLNAc38sJsp2saU++1wZh9YnsdSkKzuZlU=",
+  "Hash": "XtXNrM1dGXWsstqVykOWx82XnznhFkCJ4edYeb4tVtw=",
   "Source": "RentalyProject",
   "BasePath": "_content/RentalyProject",
   "Mode": "Default",
@@ -16031,6 +16031,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\cars\\0af79406-863d-426d-876a-7225071819f9jeep-renegade.jpg"
     },
     {
+      "Identity": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\151619fe-446e-446c-822d-6b45d7dab646bmw-m5.jpg",
+      "SourceId": "RentalyProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\",
+      "BasePath": "_content/RentalyProject",
+      "RelativePath": "assets/images/cars/151619fe-446e-446c-822d-6b45d7dab646bmw-m5.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\cars\\151619fe-446e-446c-822d-6b45d7dab646bmw-m5.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\333b8402-c887-4106-be81-b5943b3853a9ferrari-enzo.jpg",
       "SourceId": "RentalyProject",
       "SourceType": "Discovered",
@@ -16063,6 +16080,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\cars\\49369644-7b21-4e85-acc0-68a0714208f0bmw-m5.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\51de9fd2-1a3c-48cd-813b-5c065652b505ford-raptor.jpg",
+      "SourceId": "RentalyProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\",
+      "BasePath": "_content/RentalyProject",
+      "RelativePath": "assets/images/cars/51de9fd2-1a3c-48cd-813b-5c065652b505ford-raptor.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\cars\\51de9fd2-1a3c-48cd-813b-5c065652b505ford-raptor.jpg"
     },
     {
       "Identity": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\wwwroot\\assets\\images\\cars\\5a632d2b-9950-4ca8-928e-54e3cb18658e4.jpg",

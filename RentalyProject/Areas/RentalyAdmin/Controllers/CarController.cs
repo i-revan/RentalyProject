@@ -231,19 +231,9 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 MarkaId = car.MarkaId,
                 BodyTypeId = car.BodyTypeId,
                 FuelTypeId = car.FuelTypeId,
-                FeatureIds = car.CarFeatures.Select(cf => cf.FeatureId).ToList(),
-                CarImageVMs = new List<CarImageVM>()
+                FeatureIds = car.CarFeatures.Select(cf => cf.FeatureId).ToList()
             };
-            foreach (CarImages image in car.CarImages)
-            {
-                CarImageVM imageVM = new CarImageVM()
-                {
-                    Id = image.Id,
-                    ImageUrl = image.ImageUrl,
-                    IsMain = image.IsMain
-                };
-                carVM.CarImageVMs.Add(imageVM);
-            }
+            carVM = carVM.MapImages(car);
             ViewBag.Categories = _context.Categories.AsEnumerable();
             ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
             ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
@@ -251,6 +241,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             ViewBag.Features = _context.Features.AsEnumerable();
             return View(carVM);
         }
+
         [HttpPost]
         public async Task<IActionResult> Update(int? id, UpdateCarVM carVM)
         {
@@ -267,7 +258,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
                 ViewBag.Markas = _context.Markas.AsEnumerable();
                 ViewBag.Features = _context.Features.AsEnumerable();
-
+                carVM = carVM.MapImages(existed);
                 return View(carVM);
             }
             if (!(await _context.Categories.AnyAsync(c => c.Id == carVM.CategoryId)))
@@ -278,6 +269,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ViewBag.Markas = _context.Markas.AsEnumerable();
                 ViewBag.Features = _context.Features.AsEnumerable();
                 ViewBag.Colors = _context.Colors.AsEnumerable();
+                carVM = carVM.MapImages(existed);
                 ModelState.AddModelError("CategoryId", "There is no category has this id or ot was deleted");
                 return View(carVM);
             }
@@ -289,6 +281,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ViewBag.Markas = _context.Markas.AsEnumerable();
                 ViewBag.Features = _context.Features.AsEnumerable();
                 ViewBag.Colors = _context.Colors.AsEnumerable();
+                carVM = carVM.MapImages(existed);
                 ModelState.AddModelError("BodyTypeid", "There is no body type has this id or ot was deleted");
                 return View(carVM);
             }
@@ -300,6 +293,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ViewBag.Markas = _context.Markas.AsEnumerable();
                 ViewBag.Features = _context.Features.AsEnumerable();
                 ViewBag.Colors = _context.Colors.AsEnumerable();
+                carVM = carVM.MapImages(existed);
                 ModelState.AddModelError("FuelTypeId", "There is no fuel type has this id or ot was deleted");
                 return View(carVM);
             }
@@ -311,6 +305,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ViewBag.Markas = _context.Markas.AsEnumerable();
                 ViewBag.Features = _context.Features.AsEnumerable();
                 ViewBag.Colors = _context.Colors.AsEnumerable();
+                carVM = carVM.MapImages(existed);
                 ModelState.AddModelError("MarkaId", "There is no marka has this id or ot was deleted");
                 return View(carVM);
             }
@@ -340,6 +335,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                     ViewBag.Markas = _context.Markas.AsEnumerable();
                     ViewBag.Features = _context.Features.AsEnumerable();
                     ViewBag.Colors = _context.Colors.AsEnumerable();
+                    carVM = carVM.MapImages(existed);
                     ModelState.AddModelError("MainPhoto", "Invalid file format");
                     return View(carVM);
                 }
@@ -351,6 +347,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                     ViewBag.Markas = _context.Markas.AsEnumerable();
                     ViewBag.Features = _context.Features.AsEnumerable();
                     ViewBag.Colors = _context.Colors.AsEnumerable();
+                    carVM = carVM.MapImages(existed);
                     ModelState.AddModelError("MainPhoto", "Photo length must be or less than 500 kb");
                     return View(carVM);
                 }
@@ -410,6 +407,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                         ViewBag.Markas = _context.Markas.AsEnumerable();
                         ViewBag.Features = _context.Features.AsEnumerable();
                         ViewBag.Colors = _context.Colors.AsEnumerable();
+                        carVM = carVM.MapImages(existed);
                         ModelState.AddModelError("FeatureIds", $"There is no feature has {featureId} id or ot was deleted");
                         return View(carVM);
                     }
@@ -438,6 +436,28 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null || id < 1) throw new BadRequestException("Id is not found");
+            Car car = await _context.Cars.Where(c => c.Id == id)
+                .Include(c => c.Marka)
+                .Include(c => c.BodyType)
+                .Include(c => c.FuelType)
+                .Include(c => c.Category)
+                .Include(c => c.CarColors).ThenInclude(cc => cc.Color)
+                .Include(c => c.CarFeatures).ThenInclude(cf => cf.Feature)
+                .Include(c => c.CarImages)
+                .FirstOrDefaultAsync();
+            if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
+            IQueryable<CarImages> carImages = _context.CarImages.Where(ci => ci.CarId == id);
+            foreach(CarImages carImage in carImages)
+            {
+                carImage.ImageUrl.DeleteFile(_env.WebRootPath, _folder);
+            }
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
@@ -453,5 +473,6 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
             return View(car);
         }
+
     }
 }

@@ -4,14 +4,14 @@ namespace RentalyProject.ViewModels.Cars
 {
     public class UpdateCarVM
     {
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public int Seats { get; set; }
         public int Doors { get; set; }
         public int Luggage { get; set; }
         public int EngineCapacity { get; set; }
         public int Year { get; set; }
         public int Milleage { get; set; }
-        public string Transmission { get; set; }
+        public string? Transmission { get; set; }
         public decimal FuelEconomy { get; set; }
         public decimal RentPrice { get; set; }
         public int BodyTypeId { get; set; }
