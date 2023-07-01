@@ -14,8 +14,6 @@
   <ItemGroup>
     <Folder Include="Areas\RentalyAdmin\Data\" />
     <Folder Include="Areas\RentalyAdmin\Models\" />
-    <Folder Include="Repositories\Interfaces\" />
-    <Folder Include="Repositories\Implementations\" />
     <Folder Include="wwwroot\assets\vendor\FormGuide\PHPFormValidator\tests\" />
     <Folder Include="wwwroot\assets\vendor\phpmailer\phpmailer\examples\" />
     <Folder Include="wwwroot\assets\vendor\phpmailer\phpmailer\language\" />

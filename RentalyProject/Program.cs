@@ -1,10 +1,13 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RentalyProject.BackgroundServices;
 using RentalyProject.DAL;
 using RentalyProject.Interfaces;
 using RentalyProject.Middlewares;
 using RentalyProject.Models;
+using RentalyProject.Repositories.Implementations;
+using RentalyProject.Repositories.Interfaces;
 using RentalyProject.Services;
 using RentalyProject.Validators;
 using Stripe;
@@ -44,6 +47,11 @@ namespace RentalyProject
             builder.Services.AddScoped<LayoutService>();
             builder.Services.AddScoped<IEmailService,EmailService>();
             builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+            builder.Services.AddScoped<IModelRepository,ModelRepository>();
+            builder.Services.AddScoped<ICarRepository, CarRepository>();
+            builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+            builder.Services.AddScoped<ReservationService>();
+            builder.Services.AddHostedService<ReservationCompletionBackgroundService>();
             var app = builder.Build();
             app.UseAuthentication();
             app.UseAuthorization();

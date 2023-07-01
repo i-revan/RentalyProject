@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
+using RentalyProject.Repositories.Interfaces;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.Markas;
@@ -18,11 +19,13 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IModelRepository _modelRepository;
 
-        public ModelController(AppDbContext context,IMapper mapper)
+        public ModelController(AppDbContext context,IMapper mapper,IModelRepository modelRepository)
         {
             _context = context;
             _mapper = mapper;
+            _modelRepository = modelRepository;
         }
         public IActionResult Index(int take = 3,int page = 1)
         {
@@ -60,8 +63,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             modelVM.Name = modelVM.Name.Capitalize();
             Model model = _mapper.Map<Model>(modelVM);
             model.CreatedAt = DateTime.Now;
-            await _context.Models.AddAsync(model);
-            await _context.SaveChangesAsync();
+            await _modelRepository.AddAsync(model);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Update(int? id)
@@ -97,13 +99,12 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id is null || id < 1) throw new BadRequestException("Id is not found");
-            Model model = await _context.Models.FirstOrDefaultAsync(m => m.Id == id);
+            if (id < 1) throw new BadRequestException("Id is not found");
+            Model model = await _modelRepository.GetByIdAsync(id);
             if (model is null) throw new NotFoundException("There is no model has this id or it was deleted");
-            _context.Models.Remove(model);
-            await _context.SaveChangesAsync();
+            await _modelRepository.DeleteAsync(model);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Details(int? id)
