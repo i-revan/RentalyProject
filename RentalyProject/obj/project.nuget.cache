@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XMRXwZ+eA2crhHQINj3q+cNy7bPvgaW+X06LSqwfwhMUBk53pxYhQZyXb68/VZPRxZrL3ZowN4Nmgz7TXdD4vw==",
+  "dgSpecHash": "uS09LtOnrFte8N1FCUIH5ehxl9N1rdV6kyM6if4ISUEGsVkz8RPgsY4sih804Q710pCp05nOlaH1eJlMwtXNUA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Revan\\Desktop\\RentalyProject\\RentalyProject\\RentalyProject.csproj",
   "expectedPackageFiles": [
@@ -105,6 +105,7 @@
     "C:\\Users\\Revan\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Revan\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\Revan\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\Revan\\.nuget\\packages\\stripe.net\\41.22.0\\stripe.net.41.22.0.nupkg.sha512",
     "C:\\Users\\Revan\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\Revan\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\Revan\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

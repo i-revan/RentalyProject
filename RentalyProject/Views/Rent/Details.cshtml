@@ -1,4 +1,7 @@
-﻿@model ReservationVM
+﻿@using Microsoft.Extensions.Options;
+@using RentalyProject.DAL;
+@model ReservationVM
+@inject IOptions<StripeSettings> Stripe
 <!-- content begin -->
 <div class="no-bottom no-top zebra" id="content">
     <div id="top"></div>
@@ -114,7 +117,7 @@
                     </div>
                     <div class="spacer-30"></div>
                     <div class="de-box mb25">
-                        <form method="post">
+                        <form method="post" onchange="this.form.submit()">
                             <h4>Booking this car</h4>
 
                             <div class="spacer-20"></div>
@@ -155,11 +158,21 @@
                                         <span class="text-danger" asp-validation-for="ReturnDate"></span>
                                     </div>
                                 </div>
-
+                                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                             </div>
                             @if (Model.Car.IsAvailable == true)
                             {
-                                <button type='submit' id='send_message' class="btn-main btn-fullwidth">Book Now</button>
+                                <script src="//checkout.stripe.com/v2/checkout.js"
+                                class="stripe-button"
+                                data-key="@Stripe.Value.Publishablekey"
+                                data-amount="ViewBag.Total"
+                                data-name="[Deveducated]"
+                                data-locale="en"
+                                data-discription="Sample charge"
+                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                data-zip-code="true">
+                                </script>
+                                @*<button type='submit' id='send_message' class="btn-main btn-fullwidth">Book Now</button>*@
                             }
                             else
                             {

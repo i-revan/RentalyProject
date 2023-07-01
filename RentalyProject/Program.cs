@@ -7,6 +7,7 @@ using RentalyProject.Middlewares;
 using RentalyProject.Models;
 using RentalyProject.Services;
 using RentalyProject.Validators;
+using Stripe;
 
 namespace RentalyProject
 {
@@ -39,6 +40,7 @@ namespace RentalyProject
 
                 opt.SignIn.RequireConfirmedEmail = true;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
             builder.Services.AddScoped<LayoutService>();
             builder.Services.AddScoped<IEmailService,EmailService>();
             builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
@@ -46,7 +48,8 @@ namespace RentalyProject
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseStaticFiles();
-            //app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:Secretkey"];
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{area:exists}/{controller=home}/{action=index}/{id?}"

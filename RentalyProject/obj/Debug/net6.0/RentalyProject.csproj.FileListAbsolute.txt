@@ -278,3 +278,4 @@ C:\Users\Revan\Desktop\RentalyProject\RentalyProject\obj\Debug\net6.0\refint\Ren
 C:\Users\Revan\Desktop\RentalyProject\RentalyProject\obj\Debug\net6.0\RentalyProject.pdb
 C:\Users\Revan\Desktop\RentalyProject\RentalyProject\obj\Debug\net6.0\RentalyProject.genruntimeconfig.cache
 C:\Users\Revan\Desktop\RentalyProject\RentalyProject\obj\Debug\net6.0\ref\RentalyProject.dll
+C:\Users\Revan\Desktop\RentalyProject\RentalyProject\bin\Debug\net6.0\Stripe.net.dll
