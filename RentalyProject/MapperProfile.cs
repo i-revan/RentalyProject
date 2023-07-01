@@ -4,6 +4,7 @@ using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.Account;
 using RentalyProject.ViewModels.Blogs;
 using RentalyProject.ViewModels.Categories;
+using RentalyProject.ViewModels.Comments;
 using RentalyProject.ViewModels.DynamicSections;
 using RentalyProject.ViewModels.Employees;
 using RentalyProject.ViewModels.Faqs;
@@ -71,6 +72,12 @@ namespace RentalyProject
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()));
 
+            CreateMap<Comment, CommentVM>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
+                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()))
+           .ReverseMap()
+               .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Capitalize()))
+               .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Surname.Capitalize()));
         }
     }
 }

@@ -9,6 +9,7 @@ namespace RentalyProject.Models
         public string Content { get; set; }
         public string CreatedBy { get; set; }
         public List<NewsTag>? NewsTags { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
     }
 
 }

@@ -1,11 +1,14 @@
 ﻿using RentalyProject.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace RentalyProject.Models
 {
-    public class Comment:BaseEntity
+    public class Comment:BaseHasName
     {
-        public string Description { get; set; }
-        public int AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Message { get; set; }
+        public int NewsId { get; set; }
+        public News News { get; set; }
     }
 }

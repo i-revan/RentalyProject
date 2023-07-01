@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.ViewModels;
+using RentalyProject.ViewModels.Comments;
 
 namespace RentalyProject.Controllers
 {
     public class NewsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public NewsController(AppDbContext context)
+        public NewsController(AppDbContext context,IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public IActionResult Index(int page=1,int take=6)
         {
@@ -35,13 +39,42 @@ namespace RentalyProject.Controllers
                 .Include(n => n.NewsTags)
                 .ThenInclude(nt=>nt.Tag).FirstOrDefaultAsync();
             if (news is null) throw new NotFoundException("There is no news has this id or it was deleted");
+            news.Comments = await _context.Comments.Where(c=>c.NewsId ==  id).ToListAsync();
             NewsVM newsVM = new NewsVM()
             {
                 News = _context.News.AsEnumerable(),
                 Tags = _context.Tags.AsEnumerable(),
                 news = news
             };
+            
             return View(newsVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Details(int? id,NewsVM newsVM)
+        {
+            if (id is null || id < 1) throw new BadRequestException("Id is not found");
+            News news = await _context.News.Where(n => n.Id == id)
+                .Include(n => n.NewsTags)
+                .ThenInclude(nt => nt.Tag).FirstOrDefaultAsync();
+            if (news is null) throw new NotFoundException("There is no news has this id or it was deleted");
+            
+            if (!ModelState.IsValid)
+            {
+                NewsVM returnNews = new NewsVM()
+                {
+                    News = _context.News.AsEnumerable(),
+                    Tags = _context.Tags.AsEnumerable(),
+                    news = news
+                };
+                return View(returnNews);
+            }
+            
+            Comment comment = _mapper.Map<Comment>(newsVM.commentVM);
+            comment.NewsId = news.Id;
+            comment.CreatedAt = DateTime.Now;
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index","Home");
         }
     }
 }
