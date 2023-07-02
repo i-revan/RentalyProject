@@ -159,6 +159,11 @@
                             </a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown me-4">
+                        <a class="text-decoration-none text-gray" asp-area="" asp-controller="home" asp-action="index">
+                            User
+                        </a>
+                    </li>
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                             <img src="~/admin/images/faces/face5.jpg" alt="profile" />
@@ -206,6 +211,7 @@
                                 <li class="nav-item"> <a class="nav-link" asp-controller="marka" asp-action="index">Markas</a></li>
                                 <li class="nav-item"> <a class="nav-link" asp-controller="model" asp-action="index">Models</a></li>
                                 <li class="nav-item"> <a class="nav-link" asp-controller="category" asp-action="index">Categories</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-controller="transmission" asp-action="index">Transmissions</a></li>
                             </ul>
                         </div>
                     </li>
@@ -286,7 +292,7 @@
             <!-- partial -->
             <div class="main-panel">
                 @RenderBody()
-               
+
             </div>
         </div>
         <footer class="footer">

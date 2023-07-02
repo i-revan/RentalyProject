@@ -12,7 +12,8 @@ namespace RentalyProject.Models
         public int EngineCapacity { get; set; }
         public int Year { get; set; }
         public int Milleage { get; set; }
-        public string Transmission { get; set; }
+        public int TransmissionId { get; set; }
+        public Transmission Transmission { get; set; }
         public decimal FuelEconomy { get; set; }
         public decimal RentPrice { get; set; }
         public bool IsAvailable { get; set; }

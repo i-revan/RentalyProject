@@ -29,7 +29,8 @@ namespace RentalyProject.Controllers
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars
-                .Include(c => c.Model).ThenInclude(m=>m.Marka)
+                .Include(c => c.Transmission)
+                .Include(c => c.Model).ThenInclude(m => m.Marka)
                 .Include(c => c.FuelType)
                 .Include(c => c.BodyType)
                 .Include(c => c.CarImages)
@@ -45,11 +46,11 @@ namespace RentalyProject.Controllers
             return View(reservationVM);
         }
         [HttpPost]
-        public async Task<IActionResult> Details(int? id, ReservationVM reservationVM,string stripeEmail,string stripeToken)
+        public async Task<IActionResult> Details(int? id, ReservationVM reservationVM, string stripeEmail, string stripeToken)
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars
-                .Include(c => c.Model).ThenInclude(m=>m.Marka)
+                .Include(c => c.Model).ThenInclude(m => m.Marka)
                 .Include(c => c.FuelType)
                 .Include(c => c.BodyType)
                 .Include(c => c.CarImages)
@@ -81,8 +82,8 @@ namespace RentalyProject.Controllers
                 CarId = car.Id,
                 CreatedAt = DateTime.Now
             };
-            
-            
+
+
 
             //Stripe
             var optionCust = new CustomerCreateOptions
@@ -131,15 +132,15 @@ namespace RentalyProject.Controllers
                                     <tr>
             
                                     ";
-            
+
             body += @$"
-                    < td >{reservation.Car.Model.Marka.Name} {reservation.Car.Model.Name}</ td >
+                    <td>{reservation.Car.Model.Marka.Name} {reservation.Car.Model.Name}</td>
                     <td>${String.Format("{0:#,##0}", (reservation.ReturnDate - reservation.PickUpDate).Days * reservation.Car.RentPrice)}</td>
                     <td>{reservation.CreatedAt.ToString("dd MMMM, yyyy")}</td>
                 </tr>
             </tbody>
                             </table>";
-            await _emailService.SendMail(user.Email, "Reservation Replacement",body,true);
+            await _emailService.SendMail(user.Email, "Reservation Replacement", body, true);
             return RedirectToAction("Orders", "Home");
         }
     }

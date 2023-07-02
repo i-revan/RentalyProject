@@ -88,5 +88,10 @@ namespace RentalyProject.Controllers
                 .ThenInclude(m=>m.Marka).ToListAsync();
             return View(reservations);
         }
+        [Authorize]
+        public IActionResult Profile()
+        {
+            return View();
+        }
     }
 }

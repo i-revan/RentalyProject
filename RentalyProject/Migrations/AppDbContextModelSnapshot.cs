@@ -376,9 +376,8 @@ namespace RentalyProject.Migrations
                     b.Property<int>("Seats")
                         .HasColumnType("int");
 
-                    b.Property<string>("Transmission")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TransmissionId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -397,6 +396,8 @@ namespace RentalyProject.Migrations
                     b.HasIndex("MarkaId");
 
                     b.HasIndex("ModelId");
+
+                    b.HasIndex("TransmissionId");
 
                     b.ToTable("Cars");
                 });
@@ -1050,6 +1051,29 @@ namespace RentalyProject.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("RentalyProject.Models.Transmission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Transmissions");
+                });
+
             modelBuilder.Entity("RentalyProject.Models.UserQuestion", b =>
                 {
                     b.Property<int>("Id")
@@ -1185,6 +1209,12 @@ namespace RentalyProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RentalyProject.Models.Transmission", "Transmission")
+                        .WithMany("Cars")
+                        .HasForeignKey("TransmissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("BodyType");
 
                     b.Navigation("Category");
@@ -1192,6 +1222,8 @@ namespace RentalyProject.Migrations
                     b.Navigation("FuelType");
 
                     b.Navigation("Model");
+
+                    b.Navigation("Transmission");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.CarColor", b =>
@@ -1402,6 +1434,11 @@ namespace RentalyProject.Migrations
             modelBuilder.Entity("RentalyProject.Models.Tag", b =>
                 {
                     b.Navigation("NewsTags");
+                });
+
+            modelBuilder.Entity("RentalyProject.Models.Transmission", b =>
+                {
+                    b.Navigation("Cars");
                 });
 #pragma warning restore 612, 618
         }

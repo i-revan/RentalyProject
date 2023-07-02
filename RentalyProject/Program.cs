@@ -53,6 +53,7 @@ namespace RentalyProject
             builder.Services.AddScoped<IMarkaRepository, MarkaRepository>();
             builder.Services.AddScoped<IFuelTypeRepository, FuelTypeRepository>();
             builder.Services.AddScoped<ICarRepository, CarRepository>();
+            builder.Services.AddScoped<ITransmissionRepository, TransmissionRepository>();
             builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
             builder.Services.AddScoped<ReservationService>();
             builder.Services.AddHostedService<ReservationCompletionBackgroundService>();

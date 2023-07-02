@@ -42,9 +42,11 @@
                                     <span class="text-danger" asp-validation-for="Milleage"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Transmission">Transmission</label>
-                                    <input asp-for="Transmission" class="form-control" placeholder="Transmission">
-                                    <span class="text-danger" asp-validation-for="Transmission"></span>
+                                    <label asp-for="TransmissionId">Transmission</label>
+                                    <select asp-for="TransmissionId" class="form-control" asp-items="new SelectList(ViewBag.Transmissions,nameof(Transmission.Id),nameof(Transmission.Name))">
+                                        <option disabled selected>Select Transmission please</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="TransmissionId"></span>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-6">

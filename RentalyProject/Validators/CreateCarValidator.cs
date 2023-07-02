@@ -31,9 +31,9 @@ namespace RentalyProject.Validators
                 .NotEmpty().WithMessage("Enter the milleage of the car")
                 .NotNull().WithMessage("Enter the milleage of the car")
                 .Must(milleage => milleage > 0).WithMessage("Enter milleage correctly");
-            RuleFor(c => c.Transmission)
-                .NotEmpty().WithMessage("Enter the transmission of the car")
-                .NotNull().WithMessage("Enter the transmission of the car");
+            RuleFor(c => c.TransmissionId)
+                .NotEmpty().WithMessage("Select the transmission of the car")
+                .NotNull().WithMessage("Select the transmission of the car");
             RuleFor(c => c.FuelEconomy)
                 .NotEmpty().WithMessage("Enter the fuel economy of the car")
                 .NotNull().WithMessage("Enter the fuel economy of the car")
