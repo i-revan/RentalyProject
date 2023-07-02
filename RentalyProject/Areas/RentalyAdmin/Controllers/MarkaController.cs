@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
+using RentalyProject.Repositories.Interfaces;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.Markas;
@@ -15,10 +16,14 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
     public class MarkaController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IMarkaRepository _markaRepository;
+        private readonly IModelRepository _modelRepository;
 
-        public MarkaController(AppDbContext context)
+        public MarkaController(AppDbContext context,IMarkaRepository markaRepository,IModelRepository modelRepository)
         {
             _context = context;
+            _markaRepository = markaRepository;
+            _modelRepository = modelRepository;
         }
         public IActionResult Index(int take = 3,int page=1)
         {
@@ -45,8 +50,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 Name = markaVM.Name.Capitalize(),
                 CreatedAt = DateTime.Now
             };
-            await _context.Markas.AddAsync(marka);
-            await _context.SaveChangesAsync();
+            await _markaRepository.AddAsync(marka);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Update(int? id)
@@ -84,10 +88,9 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (marka is null) throw new NotFoundException("There is no marka has this id or it was deleted");
             foreach(Model model in marka.Models)
             {
-                _context.Models.Remove(model);
+                await _modelRepository.DeleteAsync(model);
             }
-            _context.Markas.Remove(marka);
-            await _context.SaveChangesAsync();
+            _markaRepository.DeleteAsync(marka);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Details(int? id)

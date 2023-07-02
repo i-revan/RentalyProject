@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
+using RentalyProject.Repositories.Interfaces;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.BodyTypes;
@@ -16,10 +17,12 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
     public class BodyTypeController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IBodyTypeRepository _bodyTypeRepository;
 
-        public BodyTypeController(AppDbContext context)
+        public BodyTypeController(AppDbContext context,IBodyTypeRepository bodyTypeRepository)
         {
             _context = context;
+            _bodyTypeRepository = bodyTypeRepository;
         }
         public IActionResult Index(int take=3,int page=1)
         {
@@ -41,8 +44,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 Name = bodyTypeVM.Name.Capitalize(),
                 CreatedAt = DateTime.Now
             };
-            await _context.BodyTypes.AddAsync(bodyType);
-            await _context.SaveChangesAsync();
+            await _bodyTypeRepository.AddAsync(bodyType);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Update(int? id)
@@ -78,8 +80,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             BodyType bodyType = await _context.BodyTypes.FirstOrDefaultAsync(m => m.Id == id);
             if (bodyType is null) throw new NotFoundException("There is no body type has this id or it was deleted");
-            _context.BodyTypes.Remove(bodyType);
-            await _context.SaveChangesAsync();
+            await _bodyTypeRepository.DeleteAsync(bodyType);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Details(int? id)

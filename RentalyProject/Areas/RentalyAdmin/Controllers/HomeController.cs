@@ -22,17 +22,17 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             IEnumerable<Reservation> reservations = _context.Reservations
                 .Include(r=>r.AppUser)
                 .Include(r=>r.Car)
-                .ThenInclude(r=>r.Marka)
+                .ThenInclude(r => r.Model).ThenInclude(m=>m.Marka)
                 .AsEnumerable();
             return View(reservations);
         }
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
-            Reservation reservation = await _context.Reservations.Where(r=>r.Id == id)
+            Reservation reservation = await _context.Reservations.Where(r => r.Id == id)
                 .Include(r => r.AppUser)
                 .Include(r => r.Car)
-                .ThenInclude(r => r.Marka).FirstOrDefaultAsync();
+            .ThenInclude(r => r.Model).ThenInclude(m=>m.Marka).FirstOrDefaultAsync();
             if (reservation is null) throw new NotFoundException("There is no reservation has this id or it was deleted");
             return View(reservation);
         }

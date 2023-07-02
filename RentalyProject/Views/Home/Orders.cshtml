@@ -40,7 +40,7 @@
                         <div class="spacer-20"></div>
                         <ul class="menu-col">
                             <li><a ><i class="fa fa-user"></i>My Profile</a></li>
-                            <li><a href="" class="active"><i class="fa fa-calendar"></i>My Orders</a></li>
+                            <li><a asp-controller="home" asp-action="orders" class="active"><i class="fa fa-calendar"></i>My Orders</a></li>
                             <li><a asp-controller="favorite" asp-action="index"><i class="fa fa-car"></i>My Favorite Cars</a></li>
                             <li><a asp-controller="account" asp-action="logout"><i class="fa fa-sign-out"></i>Sign Out</a></li>
                         </ul>
@@ -70,7 +70,7 @@
                                     {
                                         <tr>
                                             <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#@reservation.Id</div></td>
-                                            <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">@reservation.Car.Marka.Name</span></td>
+                                            <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">@reservation.Car.Model.Marka.Name @reservation.Car.Model.Name</span></td>
                                             <td><span class="d-lg-none d-sm-block">Pick Up Location</span>@reservation.PickUpLocation</td>
                                             <td><span class="d-lg-none d-sm-block">Drop Off Location</span>@reservation.DropOffLocation</td>
                                             <td><span class="d-lg-none d-sm-block">Pick Up Date</span>@reservation.PickUpDate.ToString("MMMM dd, yyyy")</td>
@@ -101,7 +101,7 @@
                                         {
                                             <tr>
                                                 <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#@reservation.Id</div></td>
-                                                <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">@reservation.Car.Marka.Name</span></td>
+                                                <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">@reservation.Car.Model.Marka.Name @reservation.Car.Model.Name</span></td>
                                                 <td><span class="d-lg-none d-sm-block">Pick Up Location</span>@reservation.PickUpLocation</td>
                                                 <td><span class="d-lg-none d-sm-block">Drop Off Location</span>@reservation.DropOffLocation</td>
                                                 <td><span class="d-lg-none d-sm-block">Pick Up Date</span>@reservation.PickUpDate.ToString("MMMM dd, yyyy")</td>
@@ -134,7 +134,7 @@
                                         {
                                             <tr>
                                                 <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#@reservation.Id</div></td>
-                                                <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">@reservation.Car.Marka.Name</span></td>
+                                                <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">@reservation.Car.Model.Marka.Name @reservation.Car.Model.Name</span></td>
                                                 <td><span class="d-lg-none d-sm-block">Pick Up Location</span>@reservation.PickUpLocation</td>
                                                 <td><span class="d-lg-none d-sm-block">Drop Off Location</span>@reservation.DropOffLocation</td>
                                                 <td><span class="d-lg-none d-sm-block">Pick Up Date</span>@reservation.PickUpDate.ToString("MMMM dd, yyyy")</td>

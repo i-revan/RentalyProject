@@ -46,8 +46,7 @@ namespace RentalyProject.Validators
                 .NotEmpty().WithMessage("Select body type of the car");
             RuleFor(c => c.FuelTypeId)
                 .NotEmpty().WithMessage("Select fuel type of the car");
-            RuleFor(c => c.MarkaId)
-                .NotEmpty().WithMessage("Select marka of the car");
+            
             RuleFor(c => c.CategoryId)
                 .NotEmpty().WithMessage("Select category of the car");
         }

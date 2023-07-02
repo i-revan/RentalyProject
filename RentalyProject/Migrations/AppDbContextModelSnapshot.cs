@@ -361,10 +361,13 @@ namespace RentalyProject.Migrations
                     b.Property<int>("Luggage")
                         .HasColumnType("int");
 
-                    b.Property<int>("MarkaId")
+                    b.Property<int?>("MarkaId")
                         .HasColumnType("int");
 
                     b.Property<int>("Milleage")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModelId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("RentPrice")
@@ -392,6 +395,8 @@ namespace RentalyProject.Migrations
                     b.HasIndex("FuelTypeId");
 
                     b.HasIndex("MarkaId");
+
+                    b.HasIndex("ModelId");
 
                     b.ToTable("Cars");
                 });
@@ -1170,9 +1175,13 @@ namespace RentalyProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentalyProject.Models.Marka", "Marka")
+                    b.HasOne("RentalyProject.Models.Marka", null)
                         .WithMany("Cars")
-                        .HasForeignKey("MarkaId")
+                        .HasForeignKey("MarkaId");
+
+                    b.HasOne("RentalyProject.Models.Model", "Model")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1182,7 +1191,7 @@ namespace RentalyProject.Migrations
 
                     b.Navigation("FuelType");
 
-                    b.Navigation("Marka");
+                    b.Navigation("Model");
                 });
 
             modelBuilder.Entity("RentalyProject.Models.CarColor", b =>
@@ -1237,7 +1246,7 @@ namespace RentalyProject.Migrations
             modelBuilder.Entity("RentalyProject.Models.Comment", b =>
                 {
                     b.HasOne("RentalyProject.Models.News", "News")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("NewsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1380,6 +1389,8 @@ namespace RentalyProject.Migrations
 
             modelBuilder.Entity("RentalyProject.Models.News", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("NewsTags");
                 });
 

@@ -41,7 +41,7 @@
                                     <img style="object-fit: cover" src="~/assets/images/cars/@item.CarImages.FirstOrDefault(c=>c.IsMain==true).ImageUrl"/>
                                 </td>
                                 <td>
-                                    @item.Marka.Name
+                                    @item.Model.Marka.Name @item.Model.Name
                                 </td>
                                 <td>
                                     @if(item.CarFeatures.Count==0)

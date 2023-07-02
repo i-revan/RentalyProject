@@ -29,7 +29,7 @@ namespace RentalyProject.Controllers
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars
-                .Include(c => c.Marka)
+                .Include(c => c.Model).ThenInclude(m=>m.Marka)
                 .Include(c => c.FuelType)
                 .Include(c => c.BodyType)
                 .Include(c => c.CarImages)
@@ -49,7 +49,7 @@ namespace RentalyProject.Controllers
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars
-                .Include(c => c.Marka)
+                .Include(c => c.Model).ThenInclude(m=>m.Marka)
                 .Include(c => c.FuelType)
                 .Include(c => c.BodyType)
                 .Include(c => c.CarImages)
@@ -131,8 +131,9 @@ namespace RentalyProject.Controllers
                                     <tr>
             
                                     ";
+            
             body += @$"
-                    <td>{reservation.Car.Marka.Name}</td>
+                    < td >{reservation.Car.Model.Marka.Name} {reservation.Car.Model.Name}</ td >
                     <td>${String.Format("{0:#,##0}", (reservation.ReturnDate - reservation.PickUpDate).Days * reservation.Car.RentPrice)}</td>
                     <td>{reservation.CreatedAt.ToString("dd MMMM, yyyy")}</td>
                 </tr>

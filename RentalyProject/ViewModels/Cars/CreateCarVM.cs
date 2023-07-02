@@ -17,6 +17,7 @@ namespace RentalyProject.ViewModels.Cars
         public decimal RentPrice { get; set; }
         public int BodyTypeId { get; set; }
         public int FuelTypeId { get; set; }
+        public int ModelId { get; set; }
         public int MarkaId { get; set; }
         public int CategoryId { get; set; }
         public IFormFile? MainPhoto { get; set; }

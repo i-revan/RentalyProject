@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
+using RentalyProject.Repositories.Interfaces;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.Cars;
@@ -16,17 +17,19 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly ICarRepository _carRepository;
         private static readonly string _folder = @"assets/images/cars";
 
-        public CarController(AppDbContext context, IWebHostEnvironment env)
+        public CarController(AppDbContext context, IWebHostEnvironment env,ICarRepository carRepository)
         {
             _context = context;
             _env = env;
+            _carRepository = carRepository;
         }
         public IActionResult Index(int take = 3, int page = 1)
         {
             IEnumerable<Car> cars = _context.Cars.Skip((page - 1) * take).Take(take)
-                .Include(c => c.Marka)
+                .Include(c => c.Model).ThenInclude(m=>m.Marka)
                 .Include(c => c.CarImages)
                 .Include(c => c.CarFeatures).ThenInclude(cf => cf.Feature);
             ViewBag.TotalPage = (int)Math.Ceiling((double)_context.Cars.Count() / take);
@@ -70,7 +73,8 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 RentPrice = carVM.RentPrice,
                 Description = carVM.Description,
                 FuelTypeId = carVM.FuelTypeId,
-                MarkaId = carVM.MarkaId,
+                ModelId = carVM.ModelId,
+                //MarkaId = carVM.MarkaId,
                 BodyTypeId = carVM.BodyTypeId,
                 CategoryId = carVM.CategoryId,
                 IsAvailable = true,
@@ -228,7 +232,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 RentPrice = car.RentPrice,
                 Description = car.Description,
                 CategoryId = car.CategoryId,
-                MarkaId = car.MarkaId,
+                //MarkaId = car.MarkaId,
                 BodyTypeId = car.BodyTypeId,
                 FuelTypeId = car.FuelTypeId,
                 FeatureIds = car.CarFeatures.Select(cf => cf.FeatureId).ToList()
@@ -297,19 +301,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 ModelState.AddModelError("FuelTypeId", "There is no fuel type has this id or ot was deleted");
                 return View(carVM);
             }
-            if (!(await _context.Markas.AnyAsync(m => m.Id == carVM.MarkaId)))
-            {
-                ViewBag.Categories = _context.Categories.AsEnumerable();
-                ViewBag.BodyTypes = _context.BodyTypes.AsEnumerable();
-                ViewBag.FuelTypes = _context.FuelTypes.AsEnumerable();
-                ViewBag.Markas = _context.Markas.AsEnumerable();
-                ViewBag.Features = _context.Features.AsEnumerable();
-                ViewBag.Colors = _context.Colors.AsEnumerable();
-                carVM = carVM.MapImages(existed);
-                ModelState.AddModelError("MarkaId", "There is no marka has this id or ot was deleted");
-                return View(carVM);
-            }
-            existed.MarkaId = carVM.MarkaId;
+            
             existed.Seats = carVM.Seats;
             existed.Doors = carVM.Doors;
             existed.Luggage = carVM.Luggage;
@@ -321,7 +313,6 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             existed.EngineCapacity = carVM.EngineCapacity;
             existed.FuelEconomy = carVM.FuelEconomy;
             existed.CategoryId = carVM.CategoryId;
-            existed.MarkaId = carVM.MarkaId;
             existed.FuelTypeId = carVM.FuelTypeId;
             existed.BodyTypeId = carVM.BodyTypeId;
 
@@ -440,7 +431,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars.Where(c => c.Id == id)
-                .Include(c => c.Marka)
+                //.Include(c => c.Marka)
                 .Include(c => c.BodyType)
                 .Include(c => c.FuelType)
                 .Include(c => c.Category)
@@ -462,7 +453,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars.Where(c => c.Id == id)
-                .Include(c => c.Marka)
+                .Include(c => c.Model).ThenInclude(m=>m.Marka)
                 .Include(c => c.BodyType)
                 .Include(c => c.FuelType)
                 .Include(c => c.Category)
@@ -473,6 +464,14 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (car is null) throw new NotFoundException("There is no car has this id or it was deleted");
             return View(car);
         }
+        [HttpGet]
+        public IActionResult GetModelsByMarka(int markaId)
+        {
+            // Retrieve the models based on the markaId
+            var models = _carRepository.GetModelsByMarka(markaId);
 
+            // Return the models as JSON
+            return Json(models);
+        }
     }
 }

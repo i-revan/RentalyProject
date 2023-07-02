@@ -7,7 +7,7 @@ namespace RentalyProject.Repositories.Implementations.Generic
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly AppDbContext _context;
+        protected readonly AppDbContext _context;
         public readonly DbSet<T> _dbSet;
 
 

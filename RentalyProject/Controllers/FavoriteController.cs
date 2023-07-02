@@ -107,8 +107,8 @@ namespace RentalyProject.Controllers
                 if (user is null) throw new NotFoundException("User is not found");
                 List<FavoriteCar> userFavorites = await _context.FavoriteCars.Where(fc => fc.AppUserid == user.Id)
                     .Include(fc => fc.Car)
-                        .ThenInclude(c => c.CarImages.Where(ci => ci.IsMain == true))
-                    .Include(fc => fc.Car.Marka)
+                    .ThenInclude(c => c.CarImages.Where(ci => ci.IsMain == true))
+                    .Include(fc => fc.Car.Model).ThenInclude(m=>m.Marka)
                     .Include(fc => fc.Car.FuelType)
                     .Include(fc => fc.Car.BodyType)
                     .ToListAsync();
@@ -124,7 +124,8 @@ namespace RentalyProject.Controllers
                         Luggage = item.Car.Luggage,
                         FuelType = item.Car.FuelType.Name,
                         BodyType = item.Car.BodyType.Name,
-                        Marka = item.Car.Marka.Name,
+                        Marka = item.Car.Model.Marka.Name,
+                        Model = item.Car.Model.Name,
                         EngineCapacity = item.Car.EngineCapacity,
                         ImageUrl = item.Car.CarImages.FirstOrDefault().ImageUrl
 
@@ -146,7 +147,7 @@ namespace RentalyProject.Controllers
                 }
                 for (int i = 0; i < favorites.Count; i++)
                 {
-                    Car car = await _context.Cars.Include(c => c.Marka)
+                    Car car = await _context.Cars.Include(c=>c.Model).ThenInclude(m=>m.Marka)
                     .Include(c => c.FuelType)
                     .Include(c => c.BodyType)
                     .Include(c => c.CarImages.Where(ci => ci.IsMain == true)).FirstOrDefaultAsync(c => c.Id == favorites[i].Id);
@@ -162,7 +163,8 @@ namespace RentalyProject.Controllers
                         EngineCapacity = car.EngineCapacity,
                         FuelType = car.FuelType.Name,
                         Doors = car.Doors,
-                        Marka = car.Marka.Name,
+                        Marka = car.Model.Marka.Name,
+                        Model = car.Model.Name,
                         RentPrice = car.RentPrice,
                         Seats = car.Seats,
                         Luggage = car.Luggage,

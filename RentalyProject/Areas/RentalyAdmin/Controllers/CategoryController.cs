@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
+using RentalyProject.Repositories.Interfaces;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.BodyTypes;
@@ -20,12 +21,14 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
         private readonly IMapper _mapper;
+        private readonly ICategoryRepository _categoryRepository;
         private static readonly string _folder = @"assets/images/select-form";
-        public CategoryController(AppDbContext context, IWebHostEnvironment env, IMapper mapper)
+        public CategoryController(AppDbContext context, IWebHostEnvironment env, IMapper mapper,ICategoryRepository categoryRepository)
         {
             _context = context;
             _env = env;
             _mapper = mapper;
+            _categoryRepository = categoryRepository;
         }
         public IActionResult Index(int take = 3, int page = 1)
         {
@@ -86,8 +89,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             }
             category.ImageUrl = await categoryVM.Photo.CreateFileAsync(_env.WebRootPath, _folder);
             category.CreatedAt = DateTime.Now;
-            await _context.Categories.AddAsync(category);
-            await _context.SaveChangesAsync();
+            await _categoryRepository.AddAsync(category);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Update(int? id)
@@ -162,8 +164,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             List<BodyTypeCategory> removeList = await _context.BodyTypeCategories.Where(b => b.CategoryId == id).ToListAsync();
             _context.BodyTypeCategories.RemoveRange(removeList);
             category.ImageUrl.DeleteFile(_env.WebRootPath, _folder);
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            await _categoryRepository.DeleteAsync(category);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Details(int? id)

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalyProject.DAL;
 using RentalyProject.Models;
+using RentalyProject.Repositories.Interfaces;
 using RentalyProject.Utilities.Exceptions;
 using RentalyProject.Utilities.Extensions;
 using RentalyProject.ViewModels.FuelTypes;
@@ -16,10 +17,12 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
     public class FuelTypeController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IFuelTypeRepository _fuelTypeRepository;
 
-        public FuelTypeController(AppDbContext context)
+        public FuelTypeController(AppDbContext context,IFuelTypeRepository fuelTypeRepository)
         {
             _context = context;
+            _fuelTypeRepository = fuelTypeRepository;
         }
         public IActionResult Index(int take=3,int page=1)
         {
@@ -47,8 +50,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
                 Name = fueltypeVM.Name.Capitalize(),
                 CreatedAt = DateTime.Now
             };
-            await _context.FuelTypes.AddAsync(fuel);
-            await _context.SaveChangesAsync();
+            await _fuelTypeRepository.AddAsync(fuel);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Update(int? id)
@@ -85,8 +87,7 @@ namespace RentalyProject.Areas.RentalyAdmin.Controllers
             if (id is null || id<1) throw new BadRequestException("Id is not found");
             FuelType fuel = await _context.FuelTypes.FirstOrDefaultAsync(f=>f.Id == id);
             if (fuel is null) throw new NotFoundException("There is no fuel type has this id or it was deleted");
-            _context.FuelTypes.Remove(fuel);
-            await _context.SaveChangesAsync();
+            await _fuelTypeRepository.DeleteAsync(fuel);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Details(int? id)

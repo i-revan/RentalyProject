@@ -298,7 +298,7 @@
                                 </div>
                                 <div class="d-info">
                                     <div class="d-text">
-                                        <h4>@car.Marka.Name </h4>
+                                        <h4>@car.Model.Marka.Name @car.Model.Name </h4>
                                         @if (User.Identity.IsAuthenticated)
                                         {
                                             if (!(Model.UserFavorites is null))

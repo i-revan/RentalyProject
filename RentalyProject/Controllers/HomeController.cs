@@ -30,7 +30,7 @@ namespace RentalyProject.Controllers
                 Faqs = _context.Faqs.AsEnumerable(),
                 News = _context.News.AsEnumerable(),
                 Cars = _context.Cars
-                .Include(c => c.Marka)
+                .Include(c => c.Model).ThenInclude(m=>m.Marka)
                 .Include(c => c.CarImages)
                 .Include(c => c.BodyType)
                 .AsEnumerable()
@@ -47,7 +47,7 @@ namespace RentalyProject.Controllers
         public IActionResult Cars(string? categoryName,string? bodyTypeName,int? seats,int? engineCapacity)
         {
             IQueryable<Car> query = _context.Cars
-                .Include(c => c.Marka)
+                .Include(c => c.Model).ThenInclude(m=>m.Marka)
                 .Include(c => c.CarImages)
                 .Include(c => c.BodyType).AsQueryable();
 
@@ -65,7 +65,7 @@ namespace RentalyProject.Controllers
             }
 
             IEnumerable<Car> Cars = _context.Cars
-                .Include(c => c.Marka)
+                .Include(c => c.Model).ThenInclude(m=>m.Marka)
                 .Include(c => c.CarImages)
                 .Include(c => c.BodyType)
                 .AsEnumerable();
@@ -81,9 +81,11 @@ namespace RentalyProject.Controllers
         public async Task<IActionResult> Orders()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            
             List<Reservation> reservations = await _context.Reservations.Where(r => r.AppUser == user)
                 .Include(r=>r.Car)
-                .ThenInclude(c=>c.Marka).ToListAsync();
+                .ThenInclude(c => c.Model)
+                .ThenInclude(m=>m.Marka).ToListAsync();
             return View(reservations);
         }
     }

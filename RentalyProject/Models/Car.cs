@@ -23,8 +23,8 @@ namespace RentalyProject.Models
         public int FuelTypeId { get; set; }
         public FuelType FuelType { get; set; }
         public ICollection<CarColor> CarColors { get; set; }
-        public int MarkaId { get; set; }
-        public Marka Marka { get; set; }
+        public int ModelId { get; set; }
+        public Model Model { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public ICollection<FavoriteCar> FavoriteCars { get; set; }

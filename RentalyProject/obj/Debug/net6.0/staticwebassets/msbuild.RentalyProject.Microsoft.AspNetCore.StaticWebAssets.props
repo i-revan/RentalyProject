@@ -15344,6 +15344,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\333b8402-c887-4106-be81-b5943b3853a9ferrari-enzo.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\346fd090-c708-47a4-a2c7-f3ac440b8191bentley.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/346fd090-c708-47a4-a2c7-f3ac440b8191bentley.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\346fd090-c708-47a4-a2c7-f3ac440b8191bentley.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\49369644-7b21-4e85-acc0-68a0714208f0bmw-m5.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>RentalyProject</SourceId>
@@ -15408,6 +15424,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\5dd0360a-17b2-49d8-9fc2-edc3d6d53a16bmw-m5.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\65390fbf-d54f-4c27-9763-cc7cb61d88d6ford-raptor.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/65390fbf-d54f-4c27-9763-cc7cb61d88d6ford-raptor.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\65390fbf-d54f-4c27-9763-cc7cb61d88d6ford-raptor.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\67815e27-6f53-4db0-a1f7-2b0fea513315hyundai-staria.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>RentalyProject</SourceId>
@@ -15423,6 +15455,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\67815e27-6f53-4db0-a1f7-2b0fea513315hyundai-staria.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\68387385-69b2-4b4b-9c85-3e84640c743abmw-m5.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/68387385-69b2-4b4b-9c85-3e84640c743abmw-m5.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\68387385-69b2-4b4b-9c85-3e84640c743abmw-m5.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\68f3b174-0be3-4deb-a14c-797d242e338cbmw-m5.jpg))">
       <SourceType>Package</SourceType>
@@ -15456,6 +15504,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\6e3c0d4e-21d3-43b5-9c7b-983b65411567lexus.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\79a2c9df-e8fa-4501-8f7c-b2eb7b53ca4dhyundai-staria.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/79a2c9df-e8fa-4501-8f7c-b2eb7b53ca4dhyundai-staria.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\79a2c9df-e8fa-4501-8f7c-b2eb7b53ca4dhyundai-staria.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\7aa89e2d-83a0-4e8c-8bea-7825d121283ebentley.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>RentalyProject</SourceId>
@@ -15471,6 +15535,38 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\7aa89e2d-83a0-4e8c-8bea-7825d121283ebentley.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\7ff27733-95b7-47e7-ad1f-9670efcda410jeep-renegade.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/7ff27733-95b7-47e7-ad1f-9670efcda410jeep-renegade.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\7ff27733-95b7-47e7-ad1f-9670efcda410jeep-renegade.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\8ed22f95-88fa-4423-9402-61147e583828bmw-m5.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/8ed22f95-88fa-4423-9402-61147e583828bmw-m5.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\8ed22f95-88fa-4423-9402-61147e583828bmw-m5.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\94fab953-55b3-4cd8-92a2-120747deb7ffjeep-renegade.jpg))">
       <SourceType>Package</SourceType>
@@ -15632,6 +15728,70 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\df9cd5c9-8faf-4d72-b992-26a37108a97chyundai-staria.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\e3d16de4-9683-4507-a421-ae7d0930b6e8mini-cooper.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/e3d16de4-9683-4507-a421-ae7d0930b6e8mini-cooper.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\e3d16de4-9683-4507-a421-ae7d0930b6e8mini-cooper.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\e8dfb346-a27e-4980-b2c9-39e841066fe7lexus.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/e8dfb346-a27e-4980-b2c9-39e841066fe7lexus.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\e8dfb346-a27e-4980-b2c9-39e841066fe7lexus.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\e94c1c0e-2163-4564-8d6f-2980576b35c8jeep-renegade.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/e94c1c0e-2163-4564-8d6f-2980576b35c8jeep-renegade.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\e94c1c0e-2163-4564-8d6f-2980576b35c8jeep-renegade.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\ea030c21-3e1f-4fb2-b409-600fa1a32a73bentley.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/ea030c21-3e1f-4fb2-b409-600fa1a32a73bentley.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\ea030c21-3e1f-4fb2-b409-600fa1a32a73bentley.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\f0263dc4-582c-4d86-892f-13218b4b9a65range-rover.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>RentalyProject</SourceId>
@@ -15663,6 +15823,54 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\f4f8336c-2dcd-4151-8ee4-ba63490ccf20chevrolet-camaro.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\f9f258fb-97c3-4817-84c9-e51cfb379d97bentley.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/f9f258fb-97c3-4817-84c9-e51cfb379d97bentley.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\f9f258fb-97c3-4817-84c9-e51cfb379d97bentley.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\fa09a41e-bd84-4136-a57d-36485a1b92cflexus - Copy.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/fa09a41e-bd84-4136-a57d-36485a1b92cflexus - Copy.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\fa09a41e-bd84-4136-a57d-36485a1b92cflexus - Copy.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\fe78eacd-34a1-4ccf-b1ea-4a8dd8cefb64ferrari-enzo.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RentalyProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RentalyProject</BasePath>
+      <RelativePath>assets/images/cars/fe78eacd-34a1-4ccf-b1ea-4a8dd8cefb64ferrari-enzo.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\fe78eacd-34a1-4ccf-b1ea-4a8dd8cefb64ferrari-enzo.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\cars\fe848bac-2781-4bd0-b473-0b082a7adfc9hyundai-staria.jpg))">
       <SourceType>Package</SourceType>
