@@ -110,7 +110,7 @@
                                     <textarea cols="10" rows="10" asp-for="commentVM.Message" class=" form-control"></textarea>
                                     <span class="text-danger" asp-validation-for="commentVM.Message"></span>
 
-
+                                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                                     <button type="submit" class="btn-main">Send</button>
 
 

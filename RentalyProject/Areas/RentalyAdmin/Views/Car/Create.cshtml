@@ -153,38 +153,44 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#markaId').change(function () {
-            var markaId = $(this).val();
 
-            // Make an AJAX request to retrieve the models based on the selected marka
-            $.ajax({
-                url: 'http://localhost:5017/RentalyAdmin/car/getmodelsbymarka?markaId=' + markaId,
-                type: 'GET',
-                dataType: 'json'
-            }).done(function (data) {
-                // Get the select element for models
-                var selectElement = $('#ModelId');
+        function GetModels() {
+            var markaId = $("#markaId").val();
+            console.log(markaId);
+            if(markaId !== null){
+                $.ajax({
+                    url: 'http://localhost:5017/RentalyAdmin/car/getmodelsbymarka?markaId=' + markaId,
+                    type: 'GET',
+                    dataType: 'json'
+                }).done(function (data) {
+                    // Get the select element for models
+                    var selectElement = $('#ModelId');
 
-                // Clear any existing options
-                selectElement.empty();
+                    // Clear any existing options
+                    selectElement.empty();
 
-                // Iterate over the models and create options
-                $.each(data, function (index, model) {
-                    // Create a new option element
-                    var option = $('<option></option>');
+                    // Iterate over the models and create options
+                    $.each(data, function (index, model) {
+                        // Create a new option element
+                        var option = $('<option></option>');
 
-                    // Set the value and text of the option
-                    option.val(model.id);
-                    option.text(model.name);
+                        // Set the value and text of the option
+                        option.val(model.id);
+                        option.text(model.name);
 
-                    // Append the option to the select element
-                    selectElement.append(option);
+                        // Append the option to the select element
+                        selectElement.append(option);
+                    });
+                }).fail(function (xhr, status, error) {
+                    // Handle the error response
+                    console.error(error);
                 });
-            }).fail(function (xhr, status, error) {
-                // Handle the error response
-                console.error(error);
-            });
-        });
+            }
+            // Make an AJAX request to retrieve the models based on the selected marka
+            
+        }
+        GetModels();
+        $('#markaId').change(GetModels);
     });
 
 </script>

@@ -68,7 +68,58 @@ namespace RentalyProject.Controllers
                 };
                 return View(returnNews);
             }
-            
+            if(newsVM.commentVM.Name is null)
+            {
+
+                NewsVM returnNews = new NewsVM()
+                {
+                    News = _context.News.AsEnumerable(),
+                    Tags = _context.Tags.AsEnumerable(),
+                    news = news
+                };
+                news.Comments = await _context.Comments.Where(c => c.NewsId == id).ToListAsync();
+                ModelState.AddModelError(String.Empty, "Enter your name");
+                return View(returnNews);
+            }
+            if (newsVM.commentVM.Surname is null)
+            {
+
+                NewsVM returnNews = new NewsVM()
+                {
+                    News = _context.News.AsEnumerable(),
+                    Tags = _context.Tags.AsEnumerable(),
+                    news = news
+                };
+                news.Comments = await _context.Comments.Where(c => c.NewsId == id).ToListAsync();
+                ModelState.AddModelError(String.Empty, "Enter your surname");
+                return View(returnNews);
+            }
+            if (newsVM.commentVM.Email is null)
+            {
+
+                NewsVM returnNews = new NewsVM()
+                {
+                    News = _context.News.AsEnumerable(),
+                    Tags = _context.Tags.AsEnumerable(),
+                    news = news
+                };
+                news.Comments = await _context.Comments.Where(c => c.NewsId == id).ToListAsync();
+                ModelState.AddModelError(String.Empty, "Enter your email");
+                return View(returnNews);
+            }
+            if (newsVM.commentVM.Message is null)
+            {
+
+                NewsVM returnNews = new NewsVM()
+                {
+                    News = _context.News.AsEnumerable(),
+                    Tags = _context.Tags.AsEnumerable(),
+                    news = news
+                };
+                news.Comments = await _context.Comments.Where(c => c.NewsId == id).ToListAsync();
+                ModelState.AddModelError(String.Empty, "Enter your message");
+                return View(returnNews);
+            }
             Comment comment = _mapper.Map<Comment>(newsVM.commentVM);
             comment.NewsId = news.Id;
             comment.CreatedAt = DateTime.Now;

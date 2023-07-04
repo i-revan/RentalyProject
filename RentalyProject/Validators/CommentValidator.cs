@@ -16,7 +16,7 @@ namespace RentalyProject.Validators
                .NotEmpty().WithMessage("Please enter your surname")
                .NotNull().WithMessage("Please enter your surname")
                .MinimumLength(3).WithMessage("Surname cannot be shorter than 3")
-               .Must(name => name.CheckIdentity()).WithMessage("Enter your surname correctly");
+               .Must(surname => surname.CheckIdentity()).WithMessage("Enter your surname correctly");
             RuleFor(c => c.Email)
                 .EmailAddress().WithMessage("Enter your email correctly!")
                 .NotEmpty().WithMessage("Email cannot be empty!")

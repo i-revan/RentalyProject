@@ -61,7 +61,7 @@ namespace RentalyProject
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseStaticFiles();
-            app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+            //app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
             StripeConfiguration.ApiKey = builder.Configuration["Stripe:Secretkey"];
             
             app.MapControllerRoute(
