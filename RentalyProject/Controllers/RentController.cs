@@ -50,6 +50,7 @@ namespace RentalyProject.Controllers
         {
             if (id is null || id < 1) throw new BadRequestException("Id is not found");
             Car car = await _context.Cars
+                .Include(c=>c.Transmission)
                 .Include(c => c.Model).ThenInclude(m => m.Marka)
                 .Include(c => c.FuelType)
                 .Include(c => c.BodyType)
